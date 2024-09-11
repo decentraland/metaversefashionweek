@@ -7,6 +7,6 @@ export default defineConfig(({ mode }) => {
   const envVariables = loadEnv(mode, process.cwd())
   return {
     plugins: [react()],
-    base: envVariables.VITE_APP_BASE_URL,
+    base: envVariables.VITE_BASE_URL,
   }
 })
