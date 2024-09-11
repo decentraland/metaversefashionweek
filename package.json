@@ -1,5 +1,5 @@
 {
-  "name": "@dcl/{{project_name}}-site",
+  "name": "@dcl/metaverse-fashion-week-site",
   "version": "0.0.1",
   "description": "Starter template for Decentraland dApps Repositories",
   "main": "index.js",
@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/decentraland/dapps-template.git"
+    "url": "git+ssh://git@github.com/decentraland/metaversefashionweek.git"
   },
   "author": "Decentraland",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/decentraland/dapps-template/issues"
+    "url": "https://github.com/decentraland/metaversefashionweek/issues"
   },
-  "homepage": "https://github.com/decentraland/dapps-template#readme",
+  "homepage": "https://github.com/decentraland/metaversefashionweek#readme",
   "engines": {
     "node": "20.*",
     "npm": "8.* || 9.*"
@@ -37,7 +37,9 @@
     "@dcl/ui-env": "^1.5.1",
     "decentraland-ui2": "^0.0.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-fast-marquee": "^1.6.5",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@dcl/eslint-config": "^2.2.1",
