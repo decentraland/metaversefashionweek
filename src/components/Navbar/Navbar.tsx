@@ -10,17 +10,28 @@ const Navbar = () => {
           <img src={iconsHeaderLeft} alt="icons-header-left" />
         </div>
         <div className="navbar-right">
-          <img src={logo} className="navbar-logo" alt="logo" />
+          <a
+            href="https://decentraland.org/?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw&utm_term=header
+"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={logo} className="navbar-logo" alt="logo" />
+          </a>
           <div className="navbar-social-icons">
             <SocialIcon
-              href="https://www.instagram.com/decentralandfashionfestival/"
+              href="https://www.instagram.com/decentraland/
+"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FaInstagram />
             </SocialIcon>
             <SocialIcon
-              href="https://www.instagram.com/decentralandfashionfestival/"
+              href="https://x.com/decentraland
+"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <FaXTwitter />
             </SocialIcon>
@@ -47,6 +58,7 @@ const NavbarContainer = styled.div`
     margin: 0 auto;
     border-bottom: 1px solid #fff;
     padding: 5px 0;
+    padding-inline: 12px;
 
     .navbar-left {
       width: 200px;
