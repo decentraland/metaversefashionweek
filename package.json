@@ -1,5 +1,5 @@
 {
-  "name": "@dcl/{{project_name}}-site",
+  "name": "@dcl/metaversefashionweek-site",
   "version": "0.0.1",
   "description": "Starter template for Decentraland dApps Repositories",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "init": "./start.sh && npm run husky-setup",
     "dev": "vite",
     "start": "vite",
-    "prebuild": "node scripts/prebuild.js",
+    "prebuild": "node scripts/prebuild.cjs",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "jest",
@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/decentraland/dapps-template.git"
+    "url": "git+ssh://git@github.com/decentraland/metaversefashionweek.git"
   },
   "author": "Decentraland",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/decentraland/dapps-template/issues"
+    "url": "https://github.com/decentraland/metaversefashionweek/issues"
   },
-  "homepage": "https://github.com/decentraland/dapps-template#readme",
+  "homepage": "https://github.com/decentraland/metaversefashionweek#readme",
   "engines": {
     "node": "20.*",
     "npm": "8.* || 9.*"
@@ -39,17 +39,19 @@
     "polished": "^4.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.5.0",
-    "styled-components": "^6.1.15"
+    "react-fast-marquee": "^1.6.5",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@dcl/eslint-config": "^2.2.1",
     "@types/jest": "^29.5.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/segment-analytics": "^0.0.38",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-jest": "^3.0.2",
