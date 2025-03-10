@@ -42,7 +42,7 @@ const AppContainer = styled.div`
 
   @media (min-width: 568px) {
     padding-top: 100px;
-    background-position: 20%;
+    background-position: 8% 69%;
     background-size: 150%;
     padding-top: 100px;
   }

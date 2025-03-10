@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 568)
+    }
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
   return (
     <HeroContainer>
       <div className="hero-top">
@@ -14,8 +27,17 @@ const Hero = () => {
       </div>
       <div className="hero-middle">
         <h2>
-          Decentraland is a social virtual world and the home of the Metaverse
-          Fashion Week.
+          {isMobile ? (
+            <>
+              Decentraland is a social virtual world <br /> and the home of the
+              Metaverse Fashion Week.
+            </>
+          ) : (
+            <>
+              Decentraland is a social virtual world and the home of the
+              Metaverse Fashion Week.
+            </>
+          )}
         </h2>
       </div>
       <div className="hero-bottom">
@@ -37,7 +59,17 @@ const HeroContainer = styled.div`
   padding: 0px 24px;
   max-width: 1240px;
   margin: 0 auto;
-  color: #ececec;
+  color: #ebecfa;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 11px;
+
+  @media screen and (max-width: 568px) {
+    padding: 0px;
+  }
 
   .hero-top {
     width: 100%;
@@ -46,47 +78,59 @@ const HeroContainer = styled.div`
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
 
     .hero-top-middle-img {
-      margin-block: 10px;
+      margin-top: 8px;
     }
   }
 
   .hero-middle {
+    margin-top: 8px;
+
     h2 {
-      font-size: 20px;
+      font-size: 21px;
       margin-left: 12px;
+      color: #ebecfa;
+    }
+
+    @media screen and (max-width: 568px) {
+      h2 {
+        font-size: 16px;
+      }
     }
   }
 
   .hero-bottom {
-    margin-top: 40px;
     padding-left: 12px;
+    height: 100%;
+    margin-top: 44px;
   }
 `
 
 const HeroBtn = styled.a`
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 600;
-  color: #ececec;
+  color: #0f1417;
+  background-color: #ebecfa;
   text-decoration: none;
-  border: 1px solid #ececec;
+  border: 1px solid #ebecfa;
   border-radius: 26px;
-  padding: 10px 20px;
+  padding: 25px 55px;
   will-change: background-color, color;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
 
   @media screen and (max-width: 568px) {
-    font-size: 20px;
+    font-size: 23px;
+    padding: 26px 40px;
   }
 
   &:hover {
-    background-color: #ececec;
-    color: #0f1417;
+    color: #ebecfa;
+    background-color: #0f1417;
   }
 `
 export { Hero }

@@ -20,8 +20,7 @@ const Navbar = () => {
           </a>
           <div className="navbar-social-icons">
             <SocialIcon
-              href="https://www.instagram.com/decentraland/
-"
+              href="https://www.instagram.com/decentraland/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -43,7 +42,7 @@ const Navbar = () => {
 }
 
 const NavbarContainer = styled.div`
-  color: #fff;
+  color: #ebecfa;
   position: relative;
   width: 100%;
   height: 100%;
@@ -56,9 +55,13 @@ const NavbarContainer = styled.div`
     max-width: 1240px;
     height: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid #fff;
-    padding: 5px 0;
-    padding-inline: 12px;
+    border-bottom: 1px solid #ebecfa;
+    padding: 5px 12px;
+
+    @media screen and (max-width: 568px) {
+      padding-inline: 0;
+      max-width: 86%;
+    }
 
     .navbar-left {
       width: 200px;
@@ -76,11 +79,16 @@ const NavbarContainer = styled.div`
 
       @media screen and (max-width: 568px) {
         margin-left: auto;
-        padding-right: 12px;
+        padding-top: 10px;
       }
 
       .navbar-logo {
-        height: 40px;
+        height: 100%;
+        max-height: 32px;
+
+        > img {
+          height: 100%;
+        }
       }
 
       .navbar-social-icons {
@@ -95,13 +103,13 @@ const NavbarContainer = styled.div`
 const SocialIcon = styled.a`
   width: 20px;
   height: 20px;
-  background-color: #ececec;
+  background-color: #ebecfa;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 
   svg {
     width: 20px;
