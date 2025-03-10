@@ -126,6 +126,7 @@ const HeroBtn = styled.a`
   @media screen and (max-width: 568px) {
     font-size: 23px;
     padding: 26px 40px;
+    // padding: 26px 40px;
   }
 
   &:hover {
