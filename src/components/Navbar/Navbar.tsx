@@ -46,6 +46,7 @@ const NavbarContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  padding-inline: 24px;
 
   .navbar-inner {
     display: flex;
@@ -56,11 +57,10 @@ const NavbarContainer = styled.div`
     height: 100%;
     margin: 0 auto;
     border-bottom: 1px solid #ebecfa;
-    padding: 5px 12px;
+    padding-block: 8px;
 
     @media screen and (max-width: 568px) {
       padding-inline: 0;
-      max-width: 86%;
     }
 
     .navbar-left {

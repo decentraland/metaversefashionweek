@@ -11,7 +11,7 @@ import LeftNavbarIconSrc from "./img/vectors/iconos-header-left.svg?url"
 
 const App = () => {
   return (
-    <>
+    <div className="app-container">
       <Navbar />
       <AppContainer>
         <Hero />
@@ -19,7 +19,7 @@ const App = () => {
           <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />
         </div>
       </AppContainer>
-    </>
+    </div>
   )
 }
 
@@ -55,7 +55,7 @@ const AppContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-block: auto 5rem;
+    margin-block: auto 2rem;
 
     img {
       width: 100%;

@@ -56,7 +56,6 @@ const Hero = () => {
 const HeroContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 0px 24px;
   max-width: 1240px;
   margin: 0 auto;
   color: #ebecfa;
@@ -69,6 +68,7 @@ const HeroContainer = styled.div`
 
   @media screen and (max-width: 568px) {
     padding: 0px;
+    padding-inline: 14px;
   }
 
   .hero-top {
@@ -124,9 +124,8 @@ const HeroBtn = styled.a`
     color 0.3s ease;
 
   @media screen and (max-width: 568px) {
-    font-size: 23px;
-    padding: 26px 40px;
-    // padding: 26px 40px;
+    font-size: 21px;
+    padding: 20px 32px;
   }
 
   &:hover {
