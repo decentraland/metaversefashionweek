@@ -25,7 +25,7 @@ const App = () => {
 
 const AppContainer = styled.div`
   background-color: #0f1417;
-  color: #fff;
+  color: #ebecfa;
   position: relative;
   width: 100%;
   height: 100%;
