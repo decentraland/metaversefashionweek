@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import url("https://fonts.cdnfonts.com/css/nasalization?styles=6717");
+
+@font-face {
+  font-family: "Gothic";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Gothic.ttf);
+}
+
+@font-face {
+  font-family: "Gothic";
+  font-style: normal;
+  font-weight: 500;
+  src: url(../fonts/GothicB.ttf);
+}
+
+@font-face {
+  font-family: "Gothic";
+  font-style: normal;
+  font-weight: 600;
+  src: url(../fonts/GothicB.ttf);
+}
+
+@font-face {
+  font-family: "Gothic";
+  font-style: normal;
+  font-weight: 700;
+  src: url(../fonts/GothicB.ttf);
+}
+
+@font-face {
+  font-family: "Gothic";
+  font-style: normal;
+  font-weight: 800;
+  src: url(../fonts/GothicB.ttf);
+}
+
+@font-face {
+  font-family: "SaintRegular";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/SaintRegular.ttf);
+}
+
+@font-face {
+  font-family: "NumerinoPixel";
+  font-style: italic;
+  font-weight: 400;
+  src: url(../fonts/Numerino-PixelItalic.otf);
+}
+
+@font-face {
+  font-family: "InterBold";
+  font-style: normal;
+  font-weight: 700;
+  src: url(../fonts/Inter-Bold.ttf);
+}
+
+@font-face {
+  font-family: "InterMedium";
+  font-style: normal;
+  font-weight: 500;
+  src: url(../fonts/Inter-Medium.ttf);
+}
