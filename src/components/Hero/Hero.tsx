@@ -2,18 +2,46 @@ import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
+
+enum DownloadLinks {
+  MAC_ARM64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-arm64.dmg",
+  MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-x64.dmg",
+  WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-win-x64.exe",
+}
+
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
+  const [downloadLink, setDownloadLink] = useState("")
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 568)
     }
     window.addEventListener("resize", handleResize)
+
+    handleDownloadLink()
+    handleResize()
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+
+  const handleDownloadLink = () => {
+    const userAgent = window.navigator.userAgent.toLowerCase()
+    switch (true) {
+      case userAgent.includes("mac") && userAgent.includes("arm64"):
+        setDownloadLink(DownloadLinks.MAC_ARM64)
+        break
+      case userAgent.includes("mac"):
+        setDownloadLink(DownloadLinks.MAC_X64)
+        break
+      case userAgent.includes("win"):
+        setDownloadLink(DownloadLinks.WIN_X64)
+        break
+      default:
+        setDownloadLink("")
+    }
+  }
 
   return (
     <HeroContainer>
@@ -41,11 +69,7 @@ const Hero = () => {
         </h2>
       </div>
       <div className="hero-bottom">
-        <HeroBtn
-          href="https://decentraland.org/download"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <HeroBtn href={downloadLink} target="_blank" rel="noopener noreferrer">
           Download To Get Ready
         </HeroBtn>
       </div>
