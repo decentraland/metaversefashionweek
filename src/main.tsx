@@ -9,10 +9,7 @@ const analytics = getAnalytics()
 
 if (analytics) {
   analytics.load(config.get("SEGMENT_API_KEY"))
-  analytics.ready(() => {
-    console.log("Ready!")
-    analytics.page()
-  })
+  analytics.page()
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
