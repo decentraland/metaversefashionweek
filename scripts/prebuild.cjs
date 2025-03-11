@@ -52,12 +52,33 @@ function getPublicUrls() {
   const isStatic = !!process.env.GEN_STATIC_LOCAL
   const isCI = !!process.env.CI
   const isVercel = isCI && !!process.env.VERCEL
-  const isCDN = !isStatic && isCI && !isVercel
+  const isGitHubPages = isCI && !!process.env.GITHUB_PAGES
+  const isCDN = !isStatic && isCI && !isVercel && !isGitHubPages
+  
   console.log("is static", isStatic)
   console.log("is CI", isCI)
   console.log("is Vercel", isVercel)
+  console.log("is GitHub Pages", isGitHubPages)
   console.log("is CDN", isCDN)
-  if (isCDN) {
+  
+  if (isGitHubPages) {
+    // GitHub Pages deployment - read CNAME file if exists
+    let customDomain = "github.io"; // Default fallback
+    
+    try {
+      if (fs.existsSync("CNAME")) {
+        customDomain = fs.readFileSync("CNAME", "utf8").trim();
+        console.log(`Found CNAME file with domain: ${customDomain}`);
+      }
+    } catch (error) {
+      console.log("Error reading CNAME file:", error);
+    }
+    
+    console.log(`Using ${customDomain} as public url for GitHub Pages`);
+    return {
+      VITE_BASE_URL: `https://${customDomain}`,
+    }
+  } else if (isCDN) {
     // master/main branch, also releases
     const cdnUrl = `https://cdn.decentraland.org/${publicPackageJson.name}/${publicPackageJson.version}`
     console.log(`Using CDN as public url: "${cdnUrl}"`)
@@ -66,7 +87,7 @@ function getPublicUrls() {
     }
   }
   // localhost
-  console.log("Using empty pubic url")
+  console.log("Using empty public url")
   return {
     VITE_BASE_URL: "",
   }
