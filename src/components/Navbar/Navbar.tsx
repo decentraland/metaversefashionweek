@@ -64,8 +64,16 @@ const NavbarContainer = styled.div`
     }
 
     .navbar-left {
-      width: 200px;
+      width: fill-available;
       height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        max-height: 40px;
+        margin-top: 2px;
+      }
 
       @media screen and (max-width: 568px) {
         display: none;
@@ -84,7 +92,8 @@ const NavbarContainer = styled.div`
 
       .navbar-logo {
         height: 100%;
-        max-height: 32px;
+        max-height: 39px;
+        margin-top: 3px;
 
         > img {
           height: 100%;
@@ -101,15 +110,13 @@ const NavbarContainer = styled.div`
 `
 
 const SocialIcon = styled.a`
-  width: 20px;
-  height: 20px;
   background-color: #ebecfa;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
 
   svg {
     width: 20px;
