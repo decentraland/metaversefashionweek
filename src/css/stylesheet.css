@@ -1,0 +1,78 @@
+@import url("fonts.css");
+@import url("reset.css");
+@import url("custom-reset.css");
+@import url("global.css");
+
+.custom-bullet-list {
+  list-style: none;
+  /* Remove default bullets */
+  padding-left: 0;
+  /* Remove extra left padding */
+  margin: 0;
+  /* Remove extra margin */
+}
+
+.custom-bullet-list li {
+  display: flex;
+  /* Use flexbox to ensure bullet and text are on the same line */
+  align-items: flex-start;
+  /* Align bullet and text to the top */
+  flex-wrap: wrap;
+  /* Allow text to wrap to a new line */
+  margin-bottom: 15px;
+  /* Space between list items */
+}
+
+.custom-bullet-list li::before {
+  content: "";
+  /* Empty content to place the image */
+  display: inline-block;
+  background-image: url("../images/Layer_1.png");
+  /* Your bullet image */
+  background-size: contain;
+  /* Make sure the image scales */
+  background-repeat: no-repeat;
+  /* No repeat for the image */
+  width: 18px;
+  /* Set the size of your bullet image */
+  height: 18px;
+  /* Set the size of your bullet image */
+  margin-right: 10px;
+  /* Space between bullet and text */
+}
+
+.custom-bullet-list li > * {
+  color: white;
+  /* Ensure the text is white */
+  margin-left: 0;
+  /* No extra space */
+  flex: 1;
+  /* Allow text to grow and take up available space */
+}
+
+.custom-bullet-list li > TextHighlight {
+  font-weight: 700;
+  /* Highlighted text bold */
+  color: white;
+  /* Highlighted text also white */
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 600px) {
+  .custom-bullet-list li::before {
+    width: 16px;
+    /* Smaller bullet image on mobile */
+    height: 16px;
+    margin-right: 8px;
+    /* Smaller space between bullet and text */
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Nasalization Rg", sans-serif !important;
+}
