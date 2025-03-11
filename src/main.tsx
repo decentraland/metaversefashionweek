@@ -6,11 +6,11 @@ import { getAnalytics } from "./modules/analytics/segment"
 import "./modules/analytics/snippet"
 
 const analytics = getAnalytics()
-analytics.load(config.get("SEGMENT_API_KEY"))
-analytics.ready(() => {
-  console.log("Ready!")
+
+if (analytics) {
+  analytics.load(config.get("SEGMENT_API_KEY"))
   analytics.page()
-})
+}
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
