@@ -43,6 +43,21 @@ const Hero = () => {
     }
   }
 
+  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const isDownloadLink = Object.values(DownloadLinks).includes(
+      e.currentTarget.href as DownloadLinks
+    )
+
+    if (!isDownloadLink) {
+      return
+    }
+
+    analytics.track("Download", {
+      href: e.currentTarget.href,
+      section: "MVFW Hero",
+    })
+  }
+
   return (
     <HeroContainer>
       <div className="hero-top">
@@ -69,7 +84,12 @@ const Hero = () => {
         </h2>
       </div>
       <div className="hero-bottom">
-        <HeroBtn href={downloadLink} target="_blank" rel="noopener noreferrer">
+        <HeroBtn
+          href={downloadLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleDownloadClick}
+        >
           Download To Get Ready
         </HeroBtn>
       </div>
