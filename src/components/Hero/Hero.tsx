@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { FaApple, FaWindows } from "react-icons/fa6"
 import { styled } from "styled-components"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
@@ -12,6 +13,10 @@ enum DownloadLinks {
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [downloadLink, setDownloadLink] = useState("")
+  const [userBrowser, setUserBrowser] = useState("")
+  const [isMac, setIsMac] = useState(false)
+  const [isWindows, setIsWindows] = useState(false)
+  const [isKnownMacArch, setIsKnownMacArch] = useState(true)
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,27 +24,48 @@ const Hero = () => {
     }
     window.addEventListener("resize", handleResize)
 
-    handleDownloadLink()
     handleResize()
+    handleDownloadLink()
+    handleUserBrowser()
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
 
+  const handleUserBrowser = () => {
+    const userAgentString = window.navigator.userAgent.toLowerCase()
+    setUserBrowser(userAgentString)
+  }
+
+  console.log("userBrowser", userBrowser)
+
   const handleDownloadLink = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
-    switch (true) {
-      case userAgent.includes("mac") && userAgent.includes("arm64"):
+
+    // Determinar si es Mac o Windows
+    const isMacDevice = userAgent.includes("mac")
+    const isWindowsDevice = userAgent.includes("win")
+
+    setIsMac(isMacDevice)
+    setIsWindows(isWindowsDevice)
+
+    // Verificar si podemos determinar la arquitectura de Mac
+    if (isMacDevice) {
+      if (userAgent.includes("arm64")) {
         setDownloadLink(DownloadLinks.MAC_ARM64)
-        break
-      case userAgent.includes("mac"):
+        setIsKnownMacArch(true)
+      } else if (userAgent.includes("intel") || userAgent.includes("x86_64")) {
         setDownloadLink(DownloadLinks.MAC_X64)
-        break
-      case userAgent.includes("win"):
-        setDownloadLink(DownloadLinks.WIN_X64)
-        break
-      default:
-        setDownloadLink("")
+        setIsKnownMacArch(true)
+      } else {
+        // No podemos determinar con certeza la arquitectura
+        setDownloadLink(DownloadLinks.MAC_ARM64) // Por defecto Apple Silicon
+        setIsKnownMacArch(false)
+      }
+    } else if (isWindowsDevice) {
+      setDownloadLink(DownloadLinks.WIN_X64)
+    } else {
+      setDownloadLink("")
     }
   }
 
@@ -69,9 +95,57 @@ const Hero = () => {
         </h2>
       </div>
       <div className="hero-bottom">
-        <HeroBtn href={downloadLink} target="_blank" rel="noopener noreferrer">
-          Download To Get Ready
-        </HeroBtn>
+        {isMac && !isKnownMacArch ? (
+          // Mostrar ambos botones para Mac cuando no se conoce la arquitectura
+          <div className="mac-buttons-container">
+            <HeroBtn
+              href={DownloadLinks.MAC_ARM64}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DOWNLOAD FOR MAC (APPLE SILICON)
+              <FaApple />
+            </HeroBtn>
+            <HeroBtn
+              href={DownloadLinks.MAC_X64}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DOWNLOAD FOR MAC (INTEL)
+              <FaApple />
+            </HeroBtn>
+          </div>
+        ) : (
+          <HeroBtn
+            href={downloadLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {isMac ? (
+              <>
+                DOWNLOAD FOR MACOS
+                <FaApple />
+              </>
+            ) : (
+              <>
+                DOWNLOAD FOR WINDOWS
+                <FaWindows />
+              </>
+            )}
+          </HeroBtn>
+        )}
+
+        {/* Mostrar el enlace alternativo solo si conocemos la plataforma y no estamos mostrando ambos botones de Mac */}
+        {(isMac || isWindows) && isKnownMacArch && (
+          <a
+            className="hero-bottom-available-on-text"
+            href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Also available on {isMac ? <FaWindows /> : <FaApple />}
+          </a>
+        )}
       </div>
     </HeroContainer>
   )
@@ -129,20 +203,47 @@ const HeroContainer = styled.div`
   .hero-bottom {
     padding-left: 12px;
     height: 100%;
-    margin-top: 44px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+
+    .mac-buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .hero-bottom-available-on-text {
+      font-size: 16px;
+      color: #ebecfa;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
   }
 `
 
 const HeroBtn = styled.a`
   font-size: 32px;
-  font-weight: 600;
-  color: #0f1417;
-  background-color: #ebecfa;
+  font-weight: 400;
+  color: #ebecfa;
+  background-color: #0f1417;
   text-decoration: none;
   border: 1px solid #ebecfa;
-  border-radius: 26px;
-  padding: 25px 55px;
+  border-radius: 40px;
+  padding: 25px 48px;
   will-change: background-color, color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -153,8 +254,13 @@ const HeroBtn = styled.a`
   }
 
   &:hover {
-    color: #ebecfa;
-    background-color: #0f1417;
+    color: #0f1417;
+    background-color: #ebecfa;
+  }
+
+  svg {
+    height: 32px;
+    width: 32px;
   }
 `
 export { Hero }
