@@ -26,29 +26,34 @@ const Hero = () => {
     window.addEventListener("resize", handleResize)
 
     handleResize()
-    handleDownloadLink()
+    getUserAgentData()
 
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
-  /**
-   * Determines and sets the appropriate download link based on the user's operating system
-   * and device architecture.
-   *
-   * - For macOS:
-   *   - If architecture is arm64 (Apple Silicon), sets the link for Mac ARM64
-   *   - If architecture is x86_64 (Intel), sets the link for Mac x64
-   *   - If architecture cannot be determined, marks the architecture as unknown
-   * - For Windows, sets the link for Windows x64
-   * - For other operating systems, sets an empty link
-   */
-  const handleDownloadLink = () => {
-    setIsMac(userAgentData?.os.name?.includes("macOS") ?? false)
-    setIsWindows(userAgentData?.os.name?.includes("Windows") ?? false)
 
-    // Verificar si podemos determinar la arquitectura de Mac
-    if (isMac) {
+  useEffect(() => {
+    if (userAgentData) {
+      getUserAgentData()
+    }
+  }, [userAgentData])
+
+  /**
+   * Determina el sistema operativo del usuario y establece los enlaces de descarga apropiados.
+   * Utiliza los datos del agente de usuario para identificar si el usuario está en macOS o Windows,
+   * y configura el enlace de descarga correspondiente según la arquitectura del CPU.
+   */
+  const getUserAgentData = () => {
+    if (!userAgentData) return
+
+    const isMacOS = userAgentData?.os.name?.includes("macOS") ?? false
+    const isWin = userAgentData?.os.name?.includes("Windows") ?? false
+
+    setIsMac(isMacOS)
+    setIsWindows(isWin)
+
+    if (isMacOS) {
       if (userAgentData?.cpu.architecture?.includes("arm64")) {
         setDownloadLink(DownloadLinks.MAC_ARM64)
         setIsKnownMacArch(true)
@@ -57,11 +62,32 @@ const Hero = () => {
         setIsKnownMacArch(true)
       } else {
         setIsKnownMacArch(false)
+        setDownloadLink(DownloadLinks.MAC_ARM64)
       }
-    } else if (isWindows) {
+    } else if (isWin) {
       setDownloadLink(DownloadLinks.WIN_X64)
     } else {
-      setDownloadLink("")
+      setDownloadLink(DownloadLinks.UNKNOWN)
+    }
+  }
+
+  /**
+   * Maneja el evento de clic en el enlace de descarga.
+   * Registra el evento de descarga en analytics si está disponible,
+   * o abre el enlace en una nueva pestaña si ocurre algún error.
+   *
+   * @param e - Evento de clic del mouse en el enlace de descarga
+   */
+  const handleDownloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    try {
+      if (typeof analytics !== "undefined") {
+        analytics.track("Download", {
+          href: e.currentTarget.href,
+          section: "MVFW Hero",
+        })
+      }
+    } catch (error) {
+      window.open(e.currentTarget.href, "_blank")
     }
   }
 
@@ -93,13 +119,13 @@ const Hero = () => {
       {isLoadingUserAgentData || !userAgentData ? null : (
         <div>
           <div className="hero-bottom">
-            {/* Mostrar ambos botones para Mac cuando no se conoce la arquitectura */}
             {isMac && !isKnownMacArch ? (
               <div className="mac-buttons-container">
                 <HeroBtn
                   href={DownloadLinks.MAC_ARM64}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
                 >
                   DOWNLOAD FOR MAC (APPLE SILICON)
                   <FaApple />
@@ -108,6 +134,7 @@ const Hero = () => {
                   href={DownloadLinks.MAC_X64}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
                 >
                   DOWNLOAD FOR MAC (INTEL)
                   <FaApple />
@@ -119,6 +146,7 @@ const Hero = () => {
                   href={downloadLink}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
                 >
                   {isMac && !isWindows ? (
                     <>
@@ -136,13 +164,13 @@ const Hero = () => {
               </>
             ) : null}
 
-            {/* Mostrar el enlace alternativo solo si conocemos la plataforma y no estamos mostrando ambos botones de Mac */}
             {(isMac || isWindows) && isKnownMacArch && (
               <a
                 className="hero-bottom-available-on-text"
                 href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handleDownloadLink}
               >
                 Also available on {isMac ? <FaWindows /> : <FaApple />}
               </a>
