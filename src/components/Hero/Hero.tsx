@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+import { FaApple, FaWindows } from "react-icons/fa6"
 import { styled } from "styled-components"
+import { useAdvancedUserAgentData } from "../../hooks/useAdvancedUserAgentData"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
 
@@ -7,55 +9,90 @@ enum DownloadLinks {
   MAC_ARM64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-arm64.dmg",
   MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-x64.dmg",
   WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-win-x64.exe",
+  UNKNOWN = "",
 }
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [downloadLink, setDownloadLink] = useState("")
+  const [isMac, setIsMac] = useState(false)
+  const [isWindows, setIsWindows] = useState(false)
+  const [isKnownMacArch, setIsKnownMacArch] = useState(true)
+  const [isLoadingUserAgentData, userAgentData] = useAdvancedUserAgentData()
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 568)
-    }
+    const handleResize = () => setIsMobile(window.innerWidth <= 568)
+
     window.addEventListener("resize", handleResize)
 
-    handleDownloadLink()
     handleResize()
+    getUserAgentData()
+
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
 
-  const handleDownloadLink = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase()
-    switch (true) {
-      case userAgent.includes("mac") && userAgent.includes("arm64"):
+  useEffect(() => {
+    if (userAgentData) {
+      getUserAgentData()
+    }
+  }, [userAgentData])
+
+  /**
+   * Determines the user's operating system and sets the appropriate download links.
+   * Uses user agent data to identify if the user is on macOS or Windows,
+   * and configures the download link according to the CPU architecture.
+   */
+  const getUserAgentData = () => {
+    if (!userAgentData) return
+
+    const isMacOS = userAgentData?.os.name?.includes("macOS") ?? false
+    const isWin = userAgentData?.os.name?.includes("Windows") ?? false
+
+    setIsMac(isMacOS)
+    setIsWindows(isWin)
+
+    if (isMacOS) {
+      // Verify if we can determine the architecture
+      if (!userAgentData.cpu.architecture) {
+        // We don't know which architecture
+        setIsKnownMacArch(false)
+        setDownloadLink(DownloadLinks.MAC_ARM64) // Default to Apple Silicon
+      } else if (userAgentData.cpu.architecture.includes("arm")) {
+        // It's an ARM device (Apple Silicon)
         setDownloadLink(DownloadLinks.MAC_ARM64)
-        break
-      case userAgent.includes("mac"):
+        setIsKnownMacArch(true)
+      } else {
+        // If it's not ARM, we assume it's Intel
         setDownloadLink(DownloadLinks.MAC_X64)
-        break
-      case userAgent.includes("win"):
-        setDownloadLink(DownloadLinks.WIN_X64)
-        break
-      default:
-        setDownloadLink("")
+        setIsKnownMacArch(true)
+      }
+    } else if (isWin) {
+      setDownloadLink(DownloadLinks.WIN_X64)
+    } else {
+      setDownloadLink(DownloadLinks.UNKNOWN)
     }
   }
 
-  const handleDownloadClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const isDownloadLink = Object.values(DownloadLinks).includes(
-      e.currentTarget.href as DownloadLinks
-    )
-
-    if (!isDownloadLink) {
-      return
+  /**
+   * Handles the download link click event.
+   * Tracks the download event in analytics if available,
+   * or opens the link in a new tab if an error occurs.
+   *
+   * @param e - Mouse click event on the download link
+   */
+  const handleDownloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    try {
+      if (typeof analytics !== "undefined") {
+        analytics.track("Download", {
+          href: e.currentTarget.href,
+          section: "MVFW Hero",
+        })
+      }
+    } catch (error) {
+      window.open(e.currentTarget.href, "_blank")
     }
-
-    analytics.track("Download", {
-      href: e.currentTarget.href,
-      section: "MVFW Hero",
-    })
   }
 
   return (
@@ -83,16 +120,68 @@ const Hero = () => {
           )}
         </h2>
       </div>
-      <div className="hero-bottom">
-        <HeroBtn
-          href={downloadLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleDownloadClick}
-        >
-          Download To Get Ready
-        </HeroBtn>
-      </div>
+      {isLoadingUserAgentData || !userAgentData ? null : (
+        <div>
+          <div className="hero-bottom">
+            {isMac && !isKnownMacArch ? (
+              <div className="mac-buttons-container">
+                <HeroBtn
+                  href={DownloadLinks.MAC_ARM64}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
+                >
+                  DOWNLOAD FOR MAC (APPLE SILICON)
+                  <FaApple />
+                </HeroBtn>
+                <HeroBtn
+                  href={DownloadLinks.MAC_X64}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
+                >
+                  DOWNLOAD FOR MAC (INTEL)
+                  <FaApple />
+                </HeroBtn>
+              </div>
+            ) : userAgentData && (isMac || isWindows) ? (
+              <>
+                <HeroBtn
+                  href={downloadLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={handleDownloadLink}
+                >
+                  {isMac && !isWindows ? (
+                    <>
+                      DOWNLOAD FOR MACOS
+                      <FaApple />
+                    </>
+                  ) : null}
+                  {isWindows ? (
+                    <>
+                      DOWNLOAD FOR WINDOWS
+                      <FaWindows />
+                    </>
+                  ) : null}
+                </HeroBtn>
+              </>
+            ) : null}
+
+            {(isMac || isWindows) && isKnownMacArch && (
+              <a
+                className="hero-bottom-available-on-text"
+                href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleDownloadLink}
+              >
+                Also available on {isMac ? <FaWindows /> : <FaApple />}
+              </a>
+            )}
+          </div>
+        </div>
+      )}
     </HeroContainer>
   )
 }
@@ -149,20 +238,47 @@ const HeroContainer = styled.div`
   .hero-bottom {
     padding-left: 12px;
     height: 100%;
-    margin-top: 44px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+
+    .mac-buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .hero-bottom-available-on-text {
+      font-size: 16px;
+      color: #ebecfa;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
   }
 `
 
 const HeroBtn = styled.a`
   font-size: 32px;
-  font-weight: 600;
-  color: #0f1417;
-  background-color: #ebecfa;
+  font-weight: 400;
+  color: #ebecfa;
+  background-color: #0f1417;
   text-decoration: none;
   border: 1px solid #ebecfa;
-  border-radius: 26px;
-  padding: 25px 55px;
+  border-radius: 40px;
+  padding: 25px 48px;
   will-change: background-color, color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -173,8 +289,19 @@ const HeroBtn = styled.a`
   }
 
   &:hover {
-    color: #ebecfa;
-    background-color: #0f1417;
+    color: #0f1417;
+    background-color: #ebecfa;
+
+    svg {
+      path {
+        fill: #0f1417;
+      }
+    }
+  }
+
+  svg {
+    height: 32px;
+    width: 32px;
   }
 `
 export { Hero }
