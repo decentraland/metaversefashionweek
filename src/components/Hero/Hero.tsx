@@ -40,9 +40,9 @@ const Hero = () => {
   }, [userAgentData])
 
   /**
-   * Determina el sistema operativo del usuario y establece los enlaces de descarga apropiados.
-   * Utiliza los datos del agente de usuario para identificar si el usuario está en macOS o Windows,
-   * y configura el enlace de descarga correspondiente según la arquitectura del CPU.
+   * Determines the user's operating system and sets the appropriate download links.
+   * Uses user agent data to identify if the user is on macOS or Windows,
+   * and configures the download link according to the CPU architecture.
    */
   const getUserAgentData = () => {
     if (!userAgentData) return
@@ -54,15 +54,19 @@ const Hero = () => {
     setIsWindows(isWin)
 
     if (isMacOS) {
-      if (userAgentData?.cpu.architecture?.includes("arm64")) {
+      // Verify if we can determine the architecture
+      if (!userAgentData.cpu.architecture) {
+        // We don't know which architecture
+        setIsKnownMacArch(false)
+        setDownloadLink(DownloadLinks.MAC_ARM64) // Default to Apple Silicon
+      } else if (userAgentData.cpu.architecture.includes("arm")) {
+        // It's an ARM device (Apple Silicon)
         setDownloadLink(DownloadLinks.MAC_ARM64)
-        setIsKnownMacArch(true)
-      } else if (userAgentData?.cpu.architecture?.includes("x86_64")) {
-        setDownloadLink(DownloadLinks.MAC_X64)
         setIsKnownMacArch(true)
       } else {
-        setIsKnownMacArch(false)
-        setDownloadLink(DownloadLinks.MAC_ARM64)
+        // If it's not ARM, we assume it's Intel
+        setDownloadLink(DownloadLinks.MAC_X64)
+        setIsKnownMacArch(true)
       }
     } else if (isWin) {
       setDownloadLink(DownloadLinks.WIN_X64)
@@ -72,11 +76,11 @@ const Hero = () => {
   }
 
   /**
-   * Maneja el evento de clic en el enlace de descarga.
-   * Registra el evento de descarga en analytics si está disponible,
-   * o abre el enlace en una nueva pestaña si ocurre algún error.
+   * Handles the download link click event.
+   * Tracks the download event in analytics if available,
+   * or opens the link in a new tab if an error occurs.
    *
-   * @param e - Evento de clic del mouse en el enlace de descarga
+   * @param e - Mouse click event on the download link
    */
   const handleDownloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     try {
