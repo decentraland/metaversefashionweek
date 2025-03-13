@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { FaApple, FaWindows } from "react-icons/fa6"
 import { styled } from "styled-components"
-import { UAParser } from "ua-parser-js"
+import { useAdvancedUserAgentData } from "../../hooks/useAdvancedUserAgentData"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
 
@@ -9,6 +9,7 @@ enum DownloadLinks {
   MAC_ARM64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-arm64.dmg",
   MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-x64.dmg",
   WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-win-x64.exe",
+  UNKNOWN = "",
 }
 
 const Hero = () => {
@@ -17,52 +18,47 @@ const Hero = () => {
   const [isMac, setIsMac] = useState(false)
   const [isWindows, setIsWindows] = useState(false)
   const [isKnownMacArch, setIsKnownMacArch] = useState(true)
-  const parser = new UAParser()
+  const [isLoadingUserAgentData, userAgentData] = useAdvancedUserAgentData()
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 568)
-    }
+    const handleResize = () => setIsMobile(window.innerWidth <= 568)
+
     window.addEventListener("resize", handleResize)
 
     handleResize()
     handleDownloadLink()
+
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
-
+  /**
+   * Determines and sets the appropriate download link based on the user's operating system
+   * and device architecture.
+   *
+   * - For macOS:
+   *   - If architecture is arm64 (Apple Silicon), sets the link for Mac ARM64
+   *   - If architecture is x86_64 (Intel), sets the link for Mac x64
+   *   - If architecture cannot be determined, marks the architecture as unknown
+   * - For Windows, sets the link for Windows x64
+   * - For other operating systems, sets an empty link
+   */
   const handleDownloadLink = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase()
-    if (!parser.getOS()) {
-      return
-    }
-
-    // Determinar si es Mac o Windows
-    const isMacDevice =
-      parser?.getOS()?.name?.includes("macOS") ||
-      parser?.getOS()?.name?.includes("mac")
-    const isWindowsDevice =
-      parser?.getOS()?.name?.includes("Windows") ||
-      parser?.getOS()?.name?.includes("windows")
-
-    setIsMac(isMacDevice ?? false)
-    setIsWindows(isWindowsDevice ?? false)
+    setIsMac(userAgentData?.os.name?.includes("macOS") ?? false)
+    setIsWindows(userAgentData?.os.name?.includes("Windows") ?? false)
 
     // Verificar si podemos determinar la arquitectura de Mac
-    if (isMacDevice) {
-      if (userAgent.includes("arm64")) {
+    if (isMac) {
+      if (userAgentData?.cpu.architecture?.includes("arm64")) {
         setDownloadLink(DownloadLinks.MAC_ARM64)
         setIsKnownMacArch(true)
-      } else if (userAgent.includes("intel") || userAgent.includes("x86_64")) {
+      } else if (userAgentData?.cpu.architecture?.includes("x86_64")) {
         setDownloadLink(DownloadLinks.MAC_X64)
         setIsKnownMacArch(true)
       } else {
-        // No podemos determinar con certeza la arquitectura
-        setDownloadLink(DownloadLinks.MAC_ARM64) // Por defecto Apple Silicon
         setIsKnownMacArch(false)
       }
-    } else if (isWindowsDevice) {
+    } else if (isWindows) {
       setDownloadLink(DownloadLinks.WIN_X64)
     } else {
       setDownloadLink("")
@@ -94,59 +90,66 @@ const Hero = () => {
           )}
         </h2>
       </div>
-      <div className="hero-bottom">
-        {isMac && !isKnownMacArch ? (
-          // Mostrar ambos botones para Mac cuando no se conoce la arquitectura
-          <div className="mac-buttons-container">
-            <HeroBtn
-              href={DownloadLinks.MAC_ARM64}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOWNLOAD FOR MAC (APPLE SILICON)
-              <FaApple />
-            </HeroBtn>
-            <HeroBtn
-              href={DownloadLinks.MAC_X64}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOWNLOAD FOR MAC (INTEL)
-              <FaApple />
-            </HeroBtn>
-          </div>
-        ) : (
-          <HeroBtn
-            href={downloadLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {isMac ? (
+      {isLoadingUserAgentData || !userAgentData ? null : (
+        <div>
+          <div className="hero-bottom">
+            {/* Mostrar ambos botones para Mac cuando no se conoce la arquitectura */}
+            {isMac && !isKnownMacArch ? (
+              <div className="mac-buttons-container">
+                <HeroBtn
+                  href={DownloadLinks.MAC_ARM64}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DOWNLOAD FOR MAC (APPLE SILICON)
+                  <FaApple />
+                </HeroBtn>
+                <HeroBtn
+                  href={DownloadLinks.MAC_X64}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  DOWNLOAD FOR MAC (INTEL)
+                  <FaApple />
+                </HeroBtn>
+              </div>
+            ) : userAgentData && (isMac || isWindows) ? (
               <>
-                DOWNLOAD FOR MACOS
-                <FaApple />
+                <HeroBtn
+                  href={downloadLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {isMac && !isWindows ? (
+                    <>
+                      DOWNLOAD FOR MACOS
+                      <FaApple />
+                    </>
+                  ) : null}
+                  {isWindows ? (
+                    <>
+                      DOWNLOAD FOR WINDOWS
+                      <FaWindows />
+                    </>
+                  ) : null}
+                </HeroBtn>
               </>
-            ) : (
-              <>
-                DOWNLOAD FOR WINDOWS
-                <FaWindows />
-              </>
-            )}
-          </HeroBtn>
-        )}
+            ) : null}
 
-        {/* Mostrar el enlace alternativo solo si conocemos la plataforma y no estamos mostrando ambos botones de Mac */}
-        {(isMac || isWindows) && isKnownMacArch && (
-          <a
-            className="hero-bottom-available-on-text"
-            href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Also available on {isMac ? <FaWindows /> : <FaApple />}
-          </a>
-        )}
-      </div>
+            {/* Mostrar el enlace alternativo solo si conocemos la plataforma y no estamos mostrando ambos botones de Mac */}
+            {(isMac || isWindows) && isKnownMacArch && (
+              <a
+                className="hero-bottom-available-on-text"
+                href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Also available on {isMac ? <FaWindows /> : <FaApple />}
+              </a>
+            )}
+          </div>
+        </div>
+      )}
     </HeroContainer>
   )
 }
