@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { FaApple, FaWindows } from "react-icons/fa6"
 import { styled } from "styled-components"
+import { UAParser } from "ua-parser-js"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import heroTop from "../../img/vectors/logo-central.svg?url"
 
@@ -13,10 +14,10 @@ enum DownloadLinks {
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [downloadLink, setDownloadLink] = useState("")
-  const [userBrowser, setUserBrowser] = useState("")
   const [isMac, setIsMac] = useState(false)
   const [isWindows, setIsWindows] = useState(false)
   const [isKnownMacArch, setIsKnownMacArch] = useState(true)
+  const parser = new UAParser()
 
   useEffect(() => {
     const handleResize = () => {
@@ -26,28 +27,27 @@ const Hero = () => {
 
     handleResize()
     handleDownloadLink()
-    handleUserBrowser()
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
 
-  const handleUserBrowser = () => {
-    const userAgentString = window.navigator.userAgent.toLowerCase()
-    setUserBrowser(userAgentString)
-  }
-
-  console.log("userBrowser", userBrowser)
-
   const handleDownloadLink = () => {
     const userAgent = window.navigator.userAgent.toLowerCase()
+    if (!parser.getOS()) {
+      return
+    }
 
     // Determinar si es Mac o Windows
-    const isMacDevice = userAgent.includes("mac")
-    const isWindowsDevice = userAgent.includes("win")
+    const isMacDevice =
+      parser?.getOS()?.name?.includes("macOS") ||
+      parser?.getOS()?.name?.includes("mac")
+    const isWindowsDevice =
+      parser?.getOS()?.name?.includes("Windows") ||
+      parser?.getOS()?.name?.includes("windows")
 
-    setIsMac(isMacDevice)
-    setIsWindows(isWindowsDevice)
+    setIsMac(isMacDevice ?? false)
+    setIsWindows(isWindowsDevice ?? false)
 
     // Verificar si podemos determinar la arquitectura de Mac
     if (isMacDevice) {
@@ -256,6 +256,12 @@ const HeroBtn = styled.a`
   &:hover {
     color: #0f1417;
     background-color: #ebecfa;
+
+    svg {
+      path {
+        fill: #0f1417;
+      }
+    }
   }
 
   svg {
