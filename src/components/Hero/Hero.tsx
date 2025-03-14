@@ -10,6 +10,7 @@ enum DownloadLinks {
   MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-x64.dmg",
   WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-win-x64.exe",
   UNKNOWN = "",
+  MOBILE_REDIRECT = "https://decentraland.org/download/",
 }
 
 const Hero = () => {
@@ -21,7 +22,10 @@ const Hero = () => {
   const [isLoadingUserAgentData, userAgentData] = useAdvancedUserAgentData()
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 568)
+    const handleResize = () => {
+      const mobileWidth = window.innerWidth <= 568
+      setIsMobile(mobileWidth)
+    }
 
     window.addEventListener("resize", handleResize)
 
@@ -40,18 +44,35 @@ const Hero = () => {
   }, [userAgentData])
 
   /**
+   * Determines if the current device is mobile based on screen size and user agent
+   */
+  const isMobileDevice = () => {
+    if (isMobile) return true
+    if (!userAgentData) return false
+    return userAgentData.mobile
+  }
+
+  /**
    * Determines the user's operating system and sets the appropriate download links.
    * Uses user agent data to identify if the user is on macOS or Windows,
    * and configures the download link according to the CPU architecture.
+   * For mobile devices, sets a redirect to the Decentraland download page.
    */
   const getUserAgentData = () => {
     if (!userAgentData) return
 
     const isMacOS = userAgentData?.os.name?.includes("macOS") ?? false
     const isWin = userAgentData?.os.name?.includes("Windows") ?? false
+    const mobileDevice = isMobileDevice()
 
     setIsMac(isMacOS)
     setIsWindows(isWin)
+
+    // For mobile devices, set the download link to the Decentraland download page
+    if (mobileDevice) {
+      setDownloadLink(DownloadLinks.MOBILE_REDIRECT)
+      return
+    }
 
     if (isMacOS) {
       // Verify if we can determine the architecture
@@ -77,14 +98,17 @@ const Hero = () => {
 
   /**
    * Handles the download link click event.
-   * Tracks the download event in analytics if available,
+   * Tracks the download event in analytics if available and if not on mobile,
    * or opens the link in a new tab if an error occurs.
    *
    * @param e - Mouse click event on the download link
    */
   const handleDownloadLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     try {
-      if (typeof analytics !== "undefined") {
+      const mobileDevice = isMobileDevice()
+
+      // Only track download events if not on mobile
+      if (typeof analytics !== "undefined" && !mobileDevice) {
         analytics.track("Download", {
           href: e.currentTarget.href,
           section: "MVFW Hero",
@@ -93,6 +117,80 @@ const Hero = () => {
     } catch (error) {
       window.open(e.currentTarget.href, "_blank")
     }
+  }
+
+  /**
+   * Renders the appropriate download button based on device type and OS
+   */
+  const renderDownloadButton = () => {
+    const mobileDevice = isMobileDevice()
+
+    // For mobile devices, show a generic download button that redirects to the download page
+    if (mobileDevice) {
+      return (
+        <HeroBtn
+          href={DownloadLinks.MOBILE_REDIRECT}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleDownloadLink}
+        >
+          DOWNLOAD DECENTRALAND
+        </HeroBtn>
+      )
+    }
+
+    // For Mac with unknown architecture, show both options
+    if (isMac && !isKnownMacArch) {
+      return (
+        <div className="mac-buttons-container">
+          <HeroBtn
+            href={DownloadLinks.MAC_ARM64}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleDownloadLink}
+          >
+            DOWNLOAD FOR MAC (APPLE SILICON)
+            <FaApple />
+          </HeroBtn>
+          <HeroBtn
+            href={DownloadLinks.MAC_X64}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleDownloadLink}
+          >
+            DOWNLOAD FOR MAC (INTEL)
+            <FaApple />
+          </HeroBtn>
+        </div>
+      )
+    }
+
+    // For desktop OS (Mac or Windows), show the appropriate button
+    if (userAgentData && (isMac || isWindows)) {
+      return (
+        <HeroBtn
+          href={downloadLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={handleDownloadLink}
+        >
+          {isMac && !isWindows ? (
+            <>
+              DOWNLOAD FOR MACOS
+              <FaApple />
+            </>
+          ) : null}
+          {isWindows ? (
+            <>
+              DOWNLOAD FOR WINDOWS
+              <FaWindows />
+            </>
+          ) : null}
+        </HeroBtn>
+      )
+    }
+
+    return null
   }
 
   return (
@@ -123,52 +221,10 @@ const Hero = () => {
       {isLoadingUserAgentData || !userAgentData ? null : (
         <div>
           <div className="hero-bottom">
-            {isMac && !isKnownMacArch ? (
-              <div className="mac-buttons-container">
-                <HeroBtn
-                  href={DownloadLinks.MAC_ARM64}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleDownloadLink}
-                >
-                  DOWNLOAD FOR MAC (APPLE SILICON)
-                  <FaApple />
-                </HeroBtn>
-                <HeroBtn
-                  href={DownloadLinks.MAC_X64}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleDownloadLink}
-                >
-                  DOWNLOAD FOR MAC (INTEL)
-                  <FaApple />
-                </HeroBtn>
-              </div>
-            ) : userAgentData && (isMac || isWindows) ? (
-              <>
-                <HeroBtn
-                  href={downloadLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleDownloadLink}
-                >
-                  {isMac && !isWindows ? (
-                    <>
-                      DOWNLOAD FOR MACOS
-                      <FaApple />
-                    </>
-                  ) : null}
-                  {isWindows ? (
-                    <>
-                      DOWNLOAD FOR WINDOWS
-                      <FaWindows />
-                    </>
-                  ) : null}
-                </HeroBtn>
-              </>
-            ) : null}
+            {renderDownloadButton()}
 
-            {(isMac || isWindows) && isKnownMacArch && (
+            {/* Only show alternative download option for desktop devices and when architecture is known */}
+            {!isMobile && (isMac || isWindows) && isKnownMacArch && (
               <a
                 className="hero-bottom-available-on-text"
                 href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
