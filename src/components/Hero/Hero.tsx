@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
+import bgImage from "../../img/misc/background.webp"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
+import LeftNavbarIconSrc from "../../img/vectors/iconos-header-left.svg?url"
 import heroTop from "../../img/vectors/logo-central.svg?url"
-// import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+// import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
+// import { Marquee } from "../Marquee/Marquee"
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
@@ -22,40 +26,49 @@ const Hero = () => {
   }, [])
 
   return (
-    <HeroContainer>
-      <div className="hero-top">
-        <img className="hero-top-img" src={heroTop} alt="hero-top" />
-        <img
-          className="hero-top-middle-img"
-          src={valuePropCentral}
-          alt="hero-top"
-        />
-      </div>
-      <div className="hero-middle">
-        <h2>
-          {isMobile ? (
-            <>
-              Decentraland is a social virtual world <br /> and the home of the
-              Metaverse Fashion Week.
-            </>
-          ) : (
-            <>
-              Decentraland is a social virtual world and the home of the
-              Metaverse Fashion Week.
-            </>
-          )}
-        </h2>
-      </div>
-      {/* <div className="hero-bottom">
-        <DownloadBtn />
-      </div> */}
-    </HeroContainer>
+    <>
+      <HeroContainer>
+        <div className="hero-top">
+          <img className="hero-top-img" src={heroTop} alt="hero-top" />
+          <img
+            className="hero-top-middle-img"
+            src={valuePropCentral}
+            alt="hero-top"
+          />
+        </div>
+        <div className="hero-middle">
+          <h2>
+            {isMobile ? (
+              <>
+                Decentraland is a social virtual world <br /> and the home of
+                the Metaverse Fashion Week.
+              </>
+            ) : (
+              <>
+                Decentraland is a social virtual world and the home of the
+                Metaverse Fashion Week.
+              </>
+            )}
+          </h2>
+        </div>
+        <div className="hero-bottom">
+          <DownloadBtn />
+          {/* <JumpInBtn /> */}
+        </div>
+        <div className="mobile-icons">
+          <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />
+        </div>
+      </HeroContainer>
+      {/* <MarqueeContainer>
+        <Marquee />
+      </MarqueeContainer> */}
+    </>
   )
 }
 
 const HeroContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 1240px;
   margin: 0 auto;
   color: #ebecfa;
@@ -65,6 +78,39 @@ const HeroContainer = styled.div`
   justify-content: flex-start;
   gap: 8px;
   margin-top: 11px;
+  position: relative;
+  background-image: url(${bgImage});
+  background-position: 62% 12%;
+  background-size: 360%;
+
+  @media (min-width: 568px) {
+    padding-top: 100px;
+    background-position: 8% 69%;
+    background-size: 150%;
+    padding-top: 100px;
+  }
+
+  .mobile-icons {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block: auto 2rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+      max-width: 200px;
+      object-fit: contain;
+    }
+
+    @media (min-width: 568px) {
+      display: none;
+    }
+  }
 
   @media screen and (max-width: 568px) {
     padding: 0px;
@@ -103,10 +149,15 @@ const HeroContainer = styled.div`
   }
 
   .hero-bottom {
-    padding-left: 12px;
-    height: 100%;
-    margin-top: 30px;
+    margin-top: 10px;
+    padding-inline: 14px;
+    margin-bottom: 100px;
   }
 `
+
+// const MarqueeContainer = styled.div`
+//   margin-top: auto;
+//   position: relative;
+// `
 
 export { Hero }

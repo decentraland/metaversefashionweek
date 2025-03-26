@@ -204,6 +204,7 @@ const DownloadButton = styled.a`
   align-items: center;
   justify-content: center;
   gap: 12px;
+  margin-bottom: 12px;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
