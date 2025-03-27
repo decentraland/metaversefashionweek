@@ -20,7 +20,7 @@ const Navbar = () => {
           </a>
           <div className="navbar-social-icons">
             <SocialIcon
-              href="https://www.instagram.com/decentraland/"
+              href="https://www.instagram.com/decentraland_foundation/"
               target="_blank"
               rel="noopener noreferrer"
             >
