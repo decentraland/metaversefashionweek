@@ -8,6 +8,7 @@ import "./css/global.css"
 // Images
 import bgImage from "./img/misc/background.webp"
 import LeftNavbarIconSrc from "./img/vectors/iconos-header-left.svg?url"
+// import LeftNavbarIconSrc from "./img/vectors/iconos-header-left.svg?url"
 
 const App = () => {
   return (
