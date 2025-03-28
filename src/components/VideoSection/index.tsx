@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 // components
-// import videoSource from "../../img/videos/background-video.mp4"
-import { Marquee } from "../Marquee/Marquee"
 const videoSource =
   "https://videos.pexels.com/video-files/30207950/12951574_2560_1440_24fps.mp4"
 // assets
@@ -34,9 +32,6 @@ const VideoSection = () => {
       <VideoContainer>
         <video autoPlay muted loop playsInline src={videoSource} />
       </VideoContainer>
-      <MarqueeWrapper>
-        <Marquee />
-      </MarqueeWrapper>
     </VideoSectionContainer>
   )
 }
@@ -60,10 +55,6 @@ const VideoContainer = styled.div`
     height: 100%;
     object-fit: cover;
   }
-`
-
-const MarqueeWrapper = styled.div`
-  width: 100%;
 `
 
 export { VideoSection }

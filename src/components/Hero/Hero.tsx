@@ -4,9 +4,7 @@ import bgImage from "../../img/misc/background.webp"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import LeftNavbarIconSrc from "../../img/vectors/iconos-header-left.svg?url"
 import heroTop from "../../img/vectors/logo-central.svg?url"
-import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
-// import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
-// import { Marquee } from "../Marquee/Marquee"
+import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
@@ -26,8 +24,8 @@ const Hero = () => {
   }, [])
 
   return (
-    <>
-      <HeroContainer>
+    <HeroContainer>
+      <HeroInnerContainer>
         <div className="hero-top">
           <img className="hero-top-img" src={heroTop} alt="hero-top" />
           <img
@@ -52,21 +50,32 @@ const Hero = () => {
           </h2>
         </div>
         <div className="hero-bottom">
-          <DownloadBtn />
-          {/* <JumpInBtn /> */}
+          <JumpInBtn />
         </div>
         <div className="mobile-icons">
           <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />
         </div>
-      </HeroContainer>
-      {/* <MarqueeContainer>
-        <Marquee />
-      </MarqueeContainer> */}
-    </>
+      </HeroInnerContainer>
+    </HeroContainer>
   )
 }
 
 const HeroContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  background-image: url(${bgImage});
+  background-position: 62% 12%;
+  background-size: 360%;
+
+  @media (min-width: 568px) {
+    padding-top: 100px;
+    background-position: 8% 69%;
+    background-size: 150%;
+    padding-top: 100px;
+  }
+`
+
+const HeroInnerContainer = styled.div`
   width: 100%;
   height: auto;
   max-width: 1240px;
@@ -79,16 +88,6 @@ const HeroContainer = styled.div`
   gap: 8px;
   margin-top: 11px;
   position: relative;
-  background-image: url(${bgImage});
-  background-position: 62% 12%;
-  background-size: 360%;
-
-  @media (min-width: 568px) {
-    padding-top: 100px;
-    background-position: 8% 69%;
-    background-size: 150%;
-    padding-top: 100px;
-  }
 
   .mobile-icons {
     position: relative;
@@ -154,10 +153,5 @@ const HeroContainer = styled.div`
     margin-bottom: 100px;
   }
 `
-
-// const MarqueeContainer = styled.div`
-//   margin-top: auto;
-//   position: relative;
-// `
 
 export { Hero }

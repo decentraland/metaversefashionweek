@@ -23,6 +23,13 @@ const Marquee = () => {
     { id: 5, text: "ICONIC RUNWAYS" },
     { id: 6, text: "EPIC GIVEAWAYS" },
     { id: 7, text: "INSIDER CAREER TALKS" },
+    { id: 8, text: "METAVERSE FASHION WEEK" },
+    { id: 9, text: "APRIL 9-12" },
+    { id: 10, text: "FREE ENTRY" },
+    { id: 11, text: "FRONT ROW ACCESS" },
+    { id: 12, text: "ICONIC RUNWAYS" },
+    { id: 13, text: "EPIC GIVEAWAYS" },
+    { id: 14, text: "INSIDER CAREER TALKS" },
   ]
 
   // Double the items to ensure smooth infinite scroll
@@ -69,7 +76,7 @@ const MarqueeWrapper = styled.div`
 const MarqueeContent = styled.div`
   display: flex;
   white-space: nowrap;
-  animation: marquee 30s linear infinite;
+  animation: marquee 60s linear infinite;
 
   &.clone {
     position: absolute;
