@@ -79,12 +79,12 @@ const ScheduleSectionContainer = styled.section`
     }
 
     > ul {
-      padding: 4px 36px;
+      padding: 4px 52px;
       margin: 0;
       display: flex;
       flex-direction: column;
       margin-bottom: 24px;
-      border-left: 1px solid #ebecfa;
+      border-left: 2px solid #ebecfa;
       max-width: 678px;
 
       li {
@@ -116,9 +116,9 @@ const ScheduleSectionContainer = styled.section`
 
     > div.schedule-tabs-container {
       padding-left: 24px;
-      border-left: 1px solid #ebecfa;
+      border-left: 2px solid #ebecfa;
 
-      @media (max-width: 768px) {
+      @media (max-width: 1024px) {
         padding-left: 0;
         border-left: none;
       }
@@ -142,7 +142,7 @@ const ScheduleSectionContainer = styled.section`
       margin-bottom: 180px;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: none;
     }
   }

@@ -46,7 +46,7 @@ const MapContainer = styled.div`
       align-items: flex-end;
       justify-content: space-between;
       flex-direction: column;
-      border-right: 1px solid #ebecfa;
+      border-right: 2px solid #ebecfa;
       padding-right: 24px;
       height: 600px;
 
@@ -81,7 +81,7 @@ const MapContainer = styled.div`
         letter-spacing: 0.1em;
         margin-left: 24px;
         padding-left: 24px;
-        border-left: 1px solid #ebecfa;
+        border-left: 2px solid #ebecfa;
         height: 120px;
         display: flex;
         align-items: center;
