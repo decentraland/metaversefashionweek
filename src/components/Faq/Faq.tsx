@@ -186,7 +186,7 @@ const FaqContainer = styled.div`
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 24px;
-  border-left: 1px solid rgba(235, 236, 250, 1);
+  border-left: 2px solid rgba(235, 236, 250, 1);
 `
 
 const LeftContainer = styled.div`

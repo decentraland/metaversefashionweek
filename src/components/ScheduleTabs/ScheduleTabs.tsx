@@ -72,7 +72,6 @@ const TabsList = styled.div`
 
 const TabButton = styled.button<{ $isActive: boolean }>`
   padding: 12px;
-  border: 2px solid blue;
   background-color: ${({ $isActive }) =>
     $isActive ? "#FFFFFF" : "rgba(15, 20, 23, 0.8)"};
   color: ${({ $isActive }) => ($isActive ? "#0F1417" : "#EBECFA")};
@@ -82,8 +81,8 @@ const TabButton = styled.button<{ $isActive: boolean }>`
   font-size: 18px;
   font-weight: 700;
   transition: all 0.3s ease;
-  width: 150px;
-  border: 1px solid rgba(235, 236, 250, 1);
+  border: 2px solid rgba(235, 236, 250, 1);
+  width: 100%;
 
   &:hover {
     background-color: ${({ $isActive }) =>
@@ -95,6 +94,10 @@ const TabButton = styled.button<{ $isActive: boolean }>`
     font-size: 16px;
     width: 100%;
   }
+
+  @media (min-width: 768px) {
+    width: 150px;
+  }
 `
 
 const TabContent = styled.div`
@@ -102,7 +105,7 @@ const TabContent = styled.div`
   border-radius: 0 0px 12px 12px;
   padding: 24px;
   color: #ebecfa;
-  border: 1px solid rgba(235, 236, 250, 1);
+  border: 2px solid rgba(235, 236, 250, 1);
   z-index: 2;
   position: relative;
   display: flex;

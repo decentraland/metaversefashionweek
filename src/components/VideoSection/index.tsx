@@ -47,7 +47,6 @@ const VideoSectionContainer = styled.section`
 const VideoContainer = styled.div`
   flex: 1;
   width: 100%;
-  margin-block: 12px;
   overflow: hidden;
 
   video {

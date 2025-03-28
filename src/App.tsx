@@ -4,6 +4,7 @@ import { styled } from "styled-components"
 import { Faq } from "./components/Faq/Faq"
 import { Footer } from "./components/Footer/Footer"
 import { Hero } from "./components/Hero/Hero"
+import { LiveTalks } from "./components/LiveTalks/LiveTalks"
 import { Map } from "./components/Map/Map"
 import { Marquee } from "./components/Marquee/Marquee"
 import { Navbar } from "./components/Navbar/Navbar"
@@ -26,6 +27,10 @@ const App = () => {
           <Marquee />
         </MarqueeWrapper>
         <VideoSection />
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+        <LiveTalks />
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>

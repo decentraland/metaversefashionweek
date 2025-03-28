@@ -175,7 +175,7 @@ const DownloadBtn = ({ className }: DownloadBtnProps) => {
   return (
     <div className="download-buttons-container">
       {renderDownloadButton()}
-      {!isMobile && (isMac || isWindows) && isKnownMacArch && (
+      {/* {!isMobile && (isMac || isWindows) && isKnownMacArch && (
         <a
           className="available-on-text"
           href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
@@ -185,20 +185,20 @@ const DownloadBtn = ({ className }: DownloadBtnProps) => {
         >
           Also available on {isMac ? <FaWindows /> : <FaApple />}
         </a>
-      )}
+      )} */}
     </div>
   )
 }
 
 const DownloadButton = styled.a`
-  font-size: 32px;
+  font-size: 16px;
   font-weight: 400;
   color: #ebecfa;
   background-color: #0f1417;
   text-decoration: none;
   border: 1px solid #ebecfa;
   border-radius: 40px;
-  padding: 25px 48px;
+  padding: 12px 24px;
   will-change: background-color, color;
   display: flex;
   align-items: center;
@@ -210,8 +210,8 @@ const DownloadButton = styled.a`
     color 0.3s ease;
 
   @media screen and (max-width: 568px) {
-    font-size: 21px;
-    padding: 20px 32px;
+    font-size: 16px;
+    padding: 12px 24px;
   }
 
   &:hover {
