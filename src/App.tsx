@@ -1,24 +1,37 @@
 // Styled Components
 import { styled } from "styled-components"
 // Components
+import { Faq } from "./components/Faq/Faq"
+import { Footer } from "./components/Footer/Footer"
 import { Hero } from "./components/Hero/Hero"
+import { Map } from "./components/Map/Map"
+import { Marquee } from "./components/Marquee/Marquee"
 import { Navbar } from "./components/Navbar/Navbar"
 // CSS
 import "./css/global.css"
+import { ScheduleSection } from "./components/ScheduleSection/ScheduleSection"
+import { VideoSection } from "./components/VideoSection"
 // Images
-import bgImage from "./img/misc/background.webp"
-import LeftNavbarIconSrc from "./img/vectors/iconos-header-left.svg?url"
-// import LeftNavbarIconSrc from "./img/vectors/iconos-header-left.svg?url"
-
 const App = () => {
   return (
     <div className="app-container">
       <Navbar />
       <AppContainer>
         <Hero />
-        <div className="mobile-icons">
-          <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />
-        </div>
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+        <ScheduleSection />
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+        <VideoSection />
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+        <Map />
+        <Faq />
+        <Footer />
       </AppContainer>
     </div>
   )
@@ -37,38 +50,10 @@ const AppContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  background-image: url(${bgImage});
-  background-position: 62% 12%;
-  background-size: 360%;
+`
 
-  @media (min-width: 568px) {
-    padding-top: 100px;
-    background-position: 8% 69%;
-    background-size: 150%;
-    padding-top: 100px;
-  }
-
-  .mobile-icons {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-block: auto 2rem;
-
-    img {
-      width: 100%;
-      height: 100%;
-      max-width: 200px;
-      object-fit: contain;
-    }
-
-    @media (min-width: 568px) {
-      display: none;
-    }
-  }
+const MarqueeWrapper = styled.div`
+  width: 100%;
 `
 
 export { App }
