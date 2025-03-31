@@ -1,4 +1,5 @@
 import { styled } from "styled-components"
+import scheduleBg from "../../img/misc/schedule.png"
 import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
 import { ScheduleTabs } from "../ScheduleTabs/ScheduleTabs"
 const ScheduleSection = () => {
@@ -27,7 +28,7 @@ const ScheduleSection = () => {
         <div className="schedule-tabs-section-left">
           <h3>Schedule</h3>
           <span className="download-btn-container">
-            <DownloadBtn />
+            <DownloadBtn showAvailableOnText={false} />
           </span>
         </div>
         <div className="schedule-tabs-container">
@@ -35,7 +36,7 @@ const ScheduleSection = () => {
         </div>
       </div>
       <div className="download-btn-container">
-        <DownloadBtn />
+        <DownloadBtn showAvailableOnText={false} />
       </div>
     </ScheduleSectionContainer>
   )
@@ -44,9 +45,17 @@ const ScheduleSection = () => {
 const ScheduleSectionContainer = styled.section`
   width: 100%;
   height: 100%;
-  background-color: #0f1417;
+  background-image: url(${scheduleBg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding-block: 48px;
   padding-inline: 24px;
+  background-size: cover;
+
+  @media (min-width: 1268px) {
+    background-position: -200px -100px;
+  }
 
   > div.schedule-container {
     display: flex;
@@ -54,7 +63,7 @@ const ScheduleSectionContainer = styled.section`
     justify-content: center;
 
     h2 {
-      font-size: 32px;
+      font-size: 40px;
       font-weight: 400;
       color: #ebecfa;
       display: flex;
@@ -65,11 +74,11 @@ const ScheduleSectionContainer = styled.section`
       padding-bottom: 24px;
       font-weight: 700;
       text-align: right;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
 
       span {
         &:first-child {
-          font-size: 24px;
+          font-size: 32px;
           text-align: right;
           font-weight: 600;
         }
@@ -79,9 +88,9 @@ const ScheduleSectionContainer = styled.section`
         display: none;
       }
 
-      @media (min-width: 1024px) {
-        width: 270px;
-      }
+      // @media (min-width: 1024px) {
+      //   width: 270px;
+      // }
     }
 
     > ul {
@@ -94,9 +103,9 @@ const ScheduleSectionContainer = styled.section`
       max-width: 678px;
 
       li {
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 500;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.08em;
         color: #ebecfa;
         margin-bottom: 8px;
 
@@ -122,8 +131,8 @@ const ScheduleSectionContainer = styled.section`
     position: relative;
 
     > div.schedule-tabs-container {
-      padding-left: 24px;
-      border-left: 2px solid #ebecfa;
+      // padding-left: 24px;
+      // border-left: 2px solid #ebecfa;
 
       @media (max-width: 1024px) {
         padding-left: 0;
@@ -138,16 +147,20 @@ const ScheduleSectionContainer = styled.section`
     justify-content: flex-start;
     flex-direction: column;
     max-width: 300px;
-
+    width: 100%;
+    height: 100%;
+    border-right: 2px solid #ebecfa;
+    padding-right: 24px;
     h3 {
-      font-size: 24px;
+      font-size: 32px;
       font-weight: 900;
       color: #ebecfa;
+      letter-spacing: 0.05em;
     }
 
     .download-btn-container {
       margin-top: auto !important;
-      a {
+      a:first-child {
         margin-bottom: 0 !important;
         margin-top: calc(100%) !important;
       }

@@ -6,7 +6,7 @@ const themeConfig = {
 
 const basicPalette = {
   black: "#000000",
-  white: "#FFFFFF",
+  white: "#ebecfa",
   background: "#040D2D",
   accent: themeConfig.accent,
   blueGray: "#B8BEE5",

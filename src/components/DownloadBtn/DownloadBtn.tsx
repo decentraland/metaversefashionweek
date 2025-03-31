@@ -13,9 +13,13 @@ enum DownloadLinks {
 
 interface DownloadBtnProps {
   className?: string
+  showAvailableOnText?: boolean
 }
 
-const DownloadBtn = ({ className }: DownloadBtnProps) => {
+const DownloadBtn = ({
+  className,
+  showAvailableOnText = true,
+}: DownloadBtnProps) => {
   const [isMobile, setIsMobile] = useState(false)
   const [downloadLink, setDownloadLink] = useState("")
   const [isMac, setIsMac] = useState(false)
@@ -173,22 +177,37 @@ const DownloadBtn = ({ className }: DownloadBtnProps) => {
   if (isLoadingUserAgentData || !userAgentData) return null
 
   return (
-    <div className="download-buttons-container">
+    <DownloadButtonsContainer>
       {renderDownloadButton()}
-      {/* {!isMobile && (isMac || isWindows) && isKnownMacArch && (
-        <a
-          className="available-on-text"
-          href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={handleDownloadLink}
-        >
-          Also available on {isMac ? <FaWindows /> : <FaApple />}
-        </a>
-      )} */}
-    </div>
+      {!isMobile &&
+        (isMac || isWindows) &&
+        isKnownMacArch &&
+        showAvailableOnText && (
+          <a
+            className="available-on-text"
+            href={isMac ? DownloadLinks.WIN_X64 : DownloadLinks.MAC_ARM64}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={handleDownloadLink}
+          >
+            Also available on {isMac ? <FaWindows /> : <FaApple />}
+          </a>
+        )}
+    </DownloadButtonsContainer>
   )
 }
+
+const DownloadButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
+
+  .available-on-text {
+    padding-top: 16px;
+  }
+`
 
 const DownloadButton = styled.a`
   font-size: 16px;
@@ -196,8 +215,8 @@ const DownloadButton = styled.a`
   color: #ebecfa;
   background-color: #0f1417;
   text-decoration: none;
-  border: 1px solid #ebecfa;
-  border-radius: 40px;
+  border: 2px solid #ebecfa;
+  border-radius: 12px;
   padding: 12px 24px;
   will-change: background-color, color;
   display: flex;

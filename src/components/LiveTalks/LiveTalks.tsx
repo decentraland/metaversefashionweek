@@ -3,6 +3,7 @@ import { liveTalksData } from "./data"
 // import bgHero2 from "../../img/music-festival/tira-larga-oscura.jpg"
 import { useResponsive } from "../../hooks/useResponsive"
 import iconsTalks from "../../img/vectors/logos-talks.svg?url"
+import iconTalksSingle from "../../img/vectors/talksico.svg?url"
 import { breakpoints } from "../../utils/theme"
 import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
 // import { Title } from "../Title"
@@ -21,6 +22,7 @@ const LiveTalks = () => {
           LinkedIn
         </h5>
         <div className="header-desktop">
+          <img src={iconTalksSingle} alt="Talks Single" />
           <p>
             All content will repeat in world starting at Midnight UTC the
             following day
@@ -102,7 +104,7 @@ const LiveTalksContainer = styled.div`
     h2 {
       font-size: 32px;
       font-weight: 700;
-      color: #fff;
+      color: #ebecfa;
       letter-spacing: 0.04em;
       text-align: right;
     }
@@ -110,7 +112,7 @@ const LiveTalksContainer = styled.div`
     h5 {
       font-size: 18px;
       font-weight: 400;
-      color: #fff;
+      color: #ebecfa;
       max-width: 350px;
       letter-spacing: 0.06em;
       text-align: right;
@@ -131,6 +133,10 @@ const LiveTalksContainer = styled.div`
       width: 100%;
       display: none;
 
+      > img:first-child {
+        margin-bottom: 12px;
+      }
+
       @media (min-width: 1024px) {
         display: flex;
         align-items: flex-end;
@@ -143,7 +149,7 @@ const LiveTalksContainer = styled.div`
       p {
         font-size: 14px;
         font-weight: 400;
-        color: #fff;
+        color: #ebecfa;
         max-width: 350px;
         letter-spacing: 0.06em;
         margin-bottom: 24px;
@@ -160,7 +166,7 @@ const LiveTalksContainer = styled.div`
         }
       }
 
-      a {
+      a:first-child {
         margin-top: 24px;
       }
     }
@@ -186,7 +192,7 @@ const TalksGrid = styled.div`
 `
 
 const TalkCard = styled.div`
-  color: #fff;
+  color: #ebecfa;
   padding: 20px;
   text-align: center;
   transition: transform 0.3s ease;
@@ -209,7 +215,7 @@ const TalkCard = styled.div`
   p {
     font-size: 14px;
     font-weight: 600;
-    color: #ffffff;
+    color: #ebecfa;
     line-height: 1.4;
   }
 
@@ -243,7 +249,7 @@ const TimeInfo = styled.div`
   margin-top: 15px;
 
   p {
-    color: rgba(255, 255, 255, 1) !important;
+    color: #ebecfa !important;
     font-weight: 400 !important;
     margin: 0;
     position: relative;

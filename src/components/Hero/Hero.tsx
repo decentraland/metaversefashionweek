@@ -4,7 +4,7 @@ import bgImage from "../../img/misc/background.webp"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import LeftNavbarIconSrc from "../../img/vectors/iconos-header-left.svg?url"
 import heroTop from "../../img/vectors/logo-central.svg?url"
-import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
+import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
 
 const Hero = () => {
   const [isMobile, setIsMobile] = useState(false)
@@ -50,7 +50,8 @@ const Hero = () => {
           </h2>
         </div>
         <div className="hero-bottom">
-          <JumpInBtn />
+          {/* <JumpInBtn /> */}
+          <DownloadBtn showAvailableOnText={false} />
         </div>
         <div className="mobile-icons">
           <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />

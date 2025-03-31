@@ -5,13 +5,13 @@ import { Faq } from "./components/Faq/Faq"
 import { Footer } from "./components/Footer/Footer"
 import { Hero } from "./components/Hero/Hero"
 import { LiveTalks } from "./components/LiveTalks/LiveTalks"
-import { Map } from "./components/Map/Map"
+// import { Map } from "./components/Map/Map"
 import { Marquee } from "./components/Marquee/Marquee"
 import { Navbar } from "./components/Navbar/Navbar"
 // CSS
 import "./css/global.css"
 import { ScheduleSection } from "./components/ScheduleSection/ScheduleSection"
-import { VideoSection } from "./components/VideoSection"
+// import { VideoSection } from "./components/VideoSection"
 // Images
 const App = () => {
   return (
@@ -26,15 +26,15 @@ const App = () => {
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>
-        <VideoSection />
-        <MarqueeWrapper>
+        {/* <VideoSection /> */}
+        {/* <MarqueeWrapper>
           <Marquee />
-        </MarqueeWrapper>
+        </MarqueeWrapper> */}
         <LiveTalks />
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>
-        <Map />
+        {/* <Map /> */}
         <Faq />
         <Footer />
       </AppContainer>

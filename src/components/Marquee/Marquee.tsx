@@ -56,8 +56,8 @@ const MarqueeContainer = styled.div`
   overflow: hidden;
   background-color: black;
   padding-block: 0.7rem;
-  border-top: 2px solid rgba(235, 236, 250, 1);
-  border-bottom: 2px solid rgba(235, 236, 250, 1);
+  border-top: 2px solid #ebecfa;
+  border-bottom: 2px solid #ebecfa;
 `
 
 const MarqueeWrapper = styled.div`
@@ -96,10 +96,12 @@ const MarqueeContent = styled.div`
 
 const MarqueeItem = styled.span`
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 0.5rem 1.5rem;
   margin: 0 0.5rem;
   border-radius: 0.375rem;
+  color: #ebecfa;
+  letter-spacing: 0.08em;
 `
 
 export { Marquee }
