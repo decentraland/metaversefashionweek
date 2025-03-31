@@ -95,7 +95,15 @@ const Faq = () => {
                 cryptocurrencies.
                 <br />
                 <br />
-                As for a digital wallet, if you already have one, great!
+                As for a{" "}
+                <a
+                  href="https://docs.decentraland.org/player/blockchain-integration/get-a-wallet/?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw25&utm_term=faq&utm_content=wallet"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  digital wallet
+                </a>
+                , if you already have one, great!
                 <br />
                 <br />
                 If you don&apos;t already have one, when you sign up for
@@ -121,8 +129,24 @@ const Faq = () => {
                   @Decentraland
                 </a>{" "}
                 on X.com and search MVFW25 for live updates. You can also find
-                Decentraland on Instagram, or subscribe to Decentraland&apos;s
-                weekly newsletter for all of the latest news.
+                Decentraland on{" "}
+                <a
+                  href="https://www.instagram.com/decentraland_foundation/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+                , or{" "}
+                <a
+                  href="https://decentraland.beehiiv.com/subscribe?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw25&utm_term=faq&utm_content=newsletter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  subscribe
+                </a>{" "}
+                to Decentraland&apos;s weekly newsletter for all of the latest
+                news.
               </p>
             ),
           },
@@ -276,7 +300,7 @@ const Answer = styled.div<{ $isActive: boolean }>`
   a {
     // background: linear-gradient(90deg, #56a7ff, #fb01ff);
     text-decoration: underline;
-    color: blue;
+    color: #eb5868;
   }
 `
 

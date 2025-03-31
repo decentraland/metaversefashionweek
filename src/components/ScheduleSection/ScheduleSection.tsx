@@ -4,7 +4,7 @@ import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
 import { ScheduleTabs } from "../ScheduleTabs/ScheduleTabs"
 const ScheduleSection = () => {
   return (
-    <ScheduleSectionContainer>
+    <ScheduleSectionContainer id="schedule">
       <div className="schedule-container">
         <h2>
           <span>Enter</span> <span>Decentraland</span> <span>APRIL 9 - 12</span>

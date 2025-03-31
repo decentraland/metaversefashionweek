@@ -14,12 +14,43 @@ const LiveTalks = () => {
   console.log("isTablet", isTablet, isDesktop)
 
   return (
-    <LiveTalksContainer id="livetalks">
+    <LiveTalksContainer id="talks">
       <div className="live-talks-header">
         <h2>Insider Career Talks</h2>
         <h5>
-          All panels will be live-streamed in Decentraland and on X YouTube and
-          LinkedIn
+          All panels will be live-streamed in{" "}
+          <a
+            href="https://decentraland.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Decentraland
+          </a>
+          ,{" "}
+          <a
+            href="https://x.com/decentraland
+"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            X
+          </a>
+          ,{" "}
+          <a
+            href="https://www.youtube.com/@decentraland_foundation"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            YouTube
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://www.linkedin.com/company/decentralandorg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
         </h5>
         <div className="header-desktop">
           <img src={iconTalksSingle} alt="Talks Single" />
@@ -41,8 +72,8 @@ const LiveTalks = () => {
             <p>{talk.description}</p>
             <p>{talk.date}</p>
             <TimeInfo>
+              <TalkTime>{talk["time-start-p"]}</TalkTime>
               <TalkTime>{talk["time-start"]}</TalkTime>
-              <TalkTime>{talk["time-end"]}</TalkTime>
               <TalkTime>{talk["time-end"]}</TalkTime>
             </TimeInfo>
           </TalkCard>
@@ -117,6 +148,11 @@ const LiveTalksContainer = styled.div`
       letter-spacing: 0.06em;
       text-align: right;
       margin-block: 12px;
+
+      a {
+        text-decoration: underline;
+        color: #eb5868;
+      }
     }
 
     @media (min-width: ${breakpoints.l}) {
