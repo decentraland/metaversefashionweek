@@ -6,30 +6,6 @@ const ScheduleTabs = () => {
 
   const days = ["DAY 1", "DAY 2", "DAY 3", "DAY 4"]
 
-  const renderContent = () => {
-    return (
-      <List>
-        <ListItem>
-          14:00 Opening X Space Beyond The Hype: What Has Web3 Gaming Achieved
-          Today? (X.com)
-        </ListItem>{" "}
-        <ListItem>
-          18:00 Mastering The Fun Factor: What Makes a Web3 Game Engaging?
-          (0,81)
-        </ListItem>{" "}
-        <ListItem>
-          20:00 The Impact of AI on Web3 Gaming: Innovation, Challenges and
-          Opportunities (0,81)
-        </ListItem>{" "}
-        <ListItem>
-          22:00 So You Want to Launch a Web3 Game?: The Latest Tools, Platforms,
-          and Best Practices (0,81)
-        </ListItem>{" "}
-        <ListItem>23:00 CLOSING PARTY Dollhouse x DCLGX (0,81)</ListItem>
-      </List>
-    )
-  }
-
   return (
     <TabsContainer>
       <TabsList>
@@ -43,7 +19,7 @@ const ScheduleTabs = () => {
           </TabButton>
         ))}
       </TabsList>
-      <TabContent>{renderContent()}</TabContent>
+      <TabContent>{renderContent(activeTab)}</TabContent>
     </TabsContainer>
   )
 }
@@ -134,6 +110,279 @@ const ListItem = styled.li`
   font-size: 18px;
   font-weight: 400;
   color: #ebecfa;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
 `
+
+const renderContent = (activeTab: number) => {
+  switch (activeTab) {
+    case 0:
+      return (
+        <>
+          <List>
+            <ListItem>
+              <span>
+                <b>05:00pm UTC 10:00am PST</b>
+              </span>
+              <span>
+                Five Years of Virtual Fashion <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>06:00pm UTC 11:00am PST</b>
+              </span>
+              <span>
+                Roustan <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>08:00pm UTC 01:00pm PST</b>
+              </span>
+              <span>
+                Virtual Identities <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>09:00pm UTC 02:00pm PST</b>
+              </span>
+              <span>
+                Winners of The Banners We Wear <b>RUNWAY</b>{" "}
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>10:00pm UTC 03:00pm PST</b>
+              </span>
+              <span>Opening Party</span>
+            </ListItem>{" "}
+          </List>
+        </>
+      )
+    case 1:
+      return (
+        <>
+          <List>
+            <ListItem>
+              <span>
+                <b>Midnight UTC 05:00pm PST</b>
+              </span>
+              <span>Five Years of Virtual Fashion (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>01:00am UTC 06:00pm PST</b>
+              </span>
+              <span>
+                Winners of The Banners We Wear <b> RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>02:00am UTC 07:00pm PST</b>
+              </span>
+              <span>Virtual Identities (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>03:00am UTC 08:00pm PST</b>
+              </span>
+              <span>
+                Decentraland Japan <b>RUNWAY</b>{" "}
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>06:00pm UTC 10:00am PST</b>
+              </span>
+              <span>
+                Gaming x Fashion <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>07:00pm UTC 11:00am PSTT</b>
+              </span>
+              <span>
+                Cyberdog <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>07:00pm UTC Midday PST</b>
+              </span>
+              <span>The WIP Meetup at MVFW</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>09:00pm UTC 02:00pm PST</b>
+              </span>
+              <span>
+                Wearables Around The World <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>10:00pm UTC 03:00pm PST</b>
+              </span>
+              <span>
+                Co-creating with AI <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+          </List>
+        </>
+      )
+    case 2:
+      return (
+        <>
+          <List>
+            <ListItem>
+              <span>
+                <b>Midnight UTC 05:00pm PST</b>
+              </span>
+              <span>Gaming x Fashion (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>01:00am UTC 06:00pm PST</b>
+              </span>
+              <span>
+                Cyberdog <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>02:00am UTC 07:00pm PST</b>
+              </span>
+              <span>Wearables Around The World (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>03:00am UTC 08:00pm PST</b>
+              </span>
+              <span>Co-creating with AI (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>03:00am UTC 08:00pm PST</b>
+              </span>
+              <span>
+                Avatares y Cultura <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>05:00pm UTC 10:00am PST</b>
+              </span>
+              <span>
+                Digital Streewtear <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>06:00pm UTC 11:00am PST</b>
+              </span>
+              <span>
+                Free The Youth <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>07:00pm UTC 12:00pm PST</b>
+              </span>
+              <span>
+                Future Retail <b>LIVE TALK</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>08:00pm UTC 01:00pm PST</b>
+              </span>
+              <span>Fashion Film Screenings</span>
+            </ListItem>{" "}
+          </List>
+        </>
+      )
+    case 3:
+      return (
+        <>
+          <List>
+            <ListItem>
+              <span>
+                <b>Midnight UTC 01:00pm PST</b>
+              </span>
+              <span>Avatares y Cultura (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>01:00am UTC 06:00pm PST</b>
+              </span>
+              <span>Digital Streetwear (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>02:00am UTC 07:00pm PST</b>
+              </span>
+              <span>
+                Free The Youth <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>03:00am UTC 08:00pm PST</b>
+              </span>
+              <span>Future Retail (Repeat Talk)</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>04:00am UTC 09:00pm PST</b>
+              </span>
+              <span>Fashion Film Screenings</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>05:00am UTC 10:00pm PST</b>
+              </span>
+              <span>
+                Cyberdog <b>RUNWAY</b>
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>06:00am UTC 11:00pm PST</b>
+              </span>
+              <span>
+                Free The Youth <b>RUNWAY</b>{" "}
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>07:00am UTC 12:00pm PST</b>
+              </span>
+              <span>
+                The Banners We Wear <b>RUNWAY</b>{" "}
+              </span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>08:00am UTC 05:00pm PST</b>
+              </span>
+              <span>Fashion Film Screenings</span>
+            </ListItem>{" "}
+            <ListItem>
+              <span>
+                <b>Midnight UTC 01:00pm PST</b>
+              </span>
+              <span>Closing Party</span>
+            </ListItem>{" "}
+          </List>
+        </>
+      )
+  }
+}
 
 export { ScheduleTabs }

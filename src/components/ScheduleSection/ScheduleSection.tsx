@@ -26,7 +26,9 @@ const ScheduleSection = () => {
       <div className="schedule-tabs-section-container">
         <div className="schedule-tabs-section-left">
           <h3>Schedule</h3>
-          <DownloadBtn />
+          <span className="download-btn-container">
+            <DownloadBtn />
+          </span>
         </div>
         <div className="schedule-tabs-container">
           <ScheduleTabs />
@@ -76,6 +78,10 @@ const ScheduleSectionContainer = styled.section`
       @media (max-width: 568px) {
         display: none;
       }
+
+      @media (min-width: 1024px) {
+        width: 270px;
+      }
     }
 
     > ul {
@@ -108,11 +114,12 @@ const ScheduleSectionContainer = styled.section`
   > div.schedule-tabs-section-container {
     margin-top: 24px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     max-width: 1200px;
     margin-inline: auto;
     gap: 24px;
+    position: relative;
 
     > div.schedule-tabs-container {
       padding-left: 24px;
@@ -128,18 +135,22 @@ const ScheduleSectionContainer = styled.section`
   div.schedule-tabs-section-left {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+    justify-content: flex-start;
     flex-direction: column;
     max-width: 300px;
-    // padding-right: 24px;
 
     h3 {
       font-size: 24px;
       font-weight: 900;
       color: #ebecfa;
-      margin-bottom: 180px;
+    }
+
+    .download-btn-container {
+      margin-top: auto !important;
+      a {
+        margin-bottom: 0 !important;
+        margin-top: calc(100%) !important;
+      }
     }
 
     @media (max-width: 1024px) {

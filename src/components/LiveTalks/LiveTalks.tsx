@@ -201,13 +201,13 @@ const TalkCard = styled.div`
 
   h3 {
     margin-top: 15px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     font-family: "Inter", sans-serif !important;
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #ffffff;
     line-height: 1.4;
