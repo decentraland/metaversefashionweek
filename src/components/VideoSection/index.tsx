@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { styled } from "styled-components"
+const videoDesktopNoText = "src/videos/teaser-desktop-no-text.mp4"
+const videoMobile = "src/videos/teaser-mobile.mp4"
 
 const VideoSection = () => {
   const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(
@@ -8,7 +10,7 @@ const VideoSection = () => {
   )
   const [isMobile, setIsMobile] = useState(false)
   const [videoSource, setVideoSource] = useState(
-    isMobile ? "src/videos/teaser-mobile.mp4" : "src/videos/teaser-desktop.mp4"
+    isMobile ? videoMobile : videoDesktopNoText
   )
   const { ref: inViewRef, inView } = useInView({
     threshold: 0,
@@ -26,11 +28,7 @@ const VideoSection = () => {
     const handleResize = () => {
       const mobileWidth = window.innerWidth <= 568
       setIsMobile(mobileWidth)
-      setVideoSource(
-        mobileWidth
-          ? "src/videos/teaser-mobile.mp4"
-          : "src/videos/teaser-desktop-no-text.mp4"
-      )
+      setVideoSource(mobileWidth ? videoMobile : videoDesktopNoText)
     }
 
     window.addEventListener("resize", handleResize)
