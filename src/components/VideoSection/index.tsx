@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { styled } from "styled-components"
-const videoDesktopNoText = "src/videos/teaser-desktop-no-text.mp4"
-const videoMobile = "src/videos/teaser-mobile.mp4"
+
+// Rutas de los videos usando la carpeta public
+const videoDesktopNoText = "/videos/teaser-desktop-no-text.mp4"
+const videoMobile = "/videos/teaser-mobile.mp4"
 
 const VideoSection = () => {
   const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(
@@ -55,10 +57,10 @@ const VideoSection = () => {
         }
       })
     } else {
-      videoElement.muted = false
+      videoElement.muted = true
       videoElement.pause()
     }
-  }, [inView, videoElement, window.innerWidth])
+  }, [inView, videoElement])
 
   return (
     <VideoSectionContainer>
