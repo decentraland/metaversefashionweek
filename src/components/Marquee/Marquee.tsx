@@ -54,7 +54,7 @@ const MarqueeContainer = styled.div`
   gap: 1rem;
   padding: 1rem 0;
   overflow: hidden;
-  background-color: black;
+  background-color: ##0f1417;
   padding-block: 0.7rem;
   border-top: 2px solid #ebecfa;
   border-bottom: 2px solid #ebecfa;

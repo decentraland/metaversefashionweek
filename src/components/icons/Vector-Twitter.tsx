@@ -25,7 +25,7 @@ export const Twitter = () => (
     </g>
     <defs>
       <clipPath id="clip0_6782_839">
-        <rect width="19" height="19" fill="white" />
+        <rect width="19" height="19" fill="#ebecfa" />
       </clipPath>
     </defs>
   </svg>

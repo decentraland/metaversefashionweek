@@ -102,7 +102,7 @@ const SocialIcon = styled.a`
   display: inline-block;
   border-radius: 100%;
   transition: transform 0.4s ease;
-  background-color: white;
+  background-color: #ebecfa;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,7 +120,7 @@ const SocialIcon = styled.a`
     height: 24px;
 
     path {
-      fill: white;
+      fill: #ebecfa;
       transition: fill 0.4s ease;
     }
 

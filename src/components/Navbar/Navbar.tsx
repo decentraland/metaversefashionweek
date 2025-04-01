@@ -75,7 +75,7 @@ const NavbarContainer = styled.div`
     max-width: 1240px;
     height: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid #ebecfa;
+    // border-bottom: 1px solid #ebecfa;
     padding-block: 8px;
 
     @media screen and (max-width: 568px) {

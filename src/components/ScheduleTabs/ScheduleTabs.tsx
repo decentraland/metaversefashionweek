@@ -4,7 +4,7 @@ import { styled } from "styled-components"
 const ScheduleTabs = () => {
   const [activeTab, setActiveTab] = useState(0)
 
-  const days = ["DAY 1", "DAY 2", "DAY 3", "DAY 4"]
+  const days = ["April 9", "April 10", "April 11", "April 12"]
 
   return (
     <TabsContainer>

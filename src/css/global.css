@@ -8,7 +8,7 @@
 }
 
 * {
-  color: white;
+  color: #ebecfa;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -32,7 +32,7 @@ html {
 #root {
   overflow-x: hidden;
   overflow: hidden;
-  color: white;
+  color: #ebecfa;
   background: var(--main-bg-color);
 }
 

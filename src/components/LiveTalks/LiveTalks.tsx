@@ -1,24 +1,17 @@
 import { styled } from "styled-components"
 import { liveTalksData } from "./data"
-// import bgHero2 from "../../img/music-festival/tira-larga-oscura.jpg"
-import { useResponsive } from "../../hooks/useResponsive"
 import iconsTalks from "../../img/vectors/logos-talks.svg?url"
 import iconTalksSingle from "../../img/vectors/talksico.svg?url"
 import { breakpoints } from "../../utils/theme"
 import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
-// import { Title } from "../Title"
 
 const LiveTalks = () => {
-  const { isTablet, isDesktop } = useResponsive()
-
-  console.log("isTablet", isTablet, isDesktop)
-
   return (
     <LiveTalksContainer id="talks">
       <div className="live-talks-header">
         <h2>Insider Career Talks</h2>
         <h5>
-          All panels will be live-streamed in{" "}
+          All talks will be live-streamed in{" "}
           <a
             href="https://decentraland.org/"
             target="_blank"
@@ -61,7 +54,7 @@ const LiveTalks = () => {
           <div className="header-desktop-icons">
             <img src={iconsTalks} alt="LinkedIn" />
           </div>
-          <DownloadBtn />
+          <DownloadBtn showAvailableOnText={false} />
         </div>
       </div>
       <TalksGrid>
@@ -74,7 +67,7 @@ const LiveTalks = () => {
             <TimeInfo>
               <TalkTime>{talk["time-start-p"]}</TalkTime>
               <TalkTime>{talk["time-start"]}</TalkTime>
-              <TalkTime>{talk["time-end"]}</TalkTime>
+              {/* <TalkTime>{talk["time-end"]}</TalkTime> */}
             </TimeInfo>
           </TalkCard>
         ))}
@@ -87,7 +80,7 @@ const LiveTalksContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: #ebecfa;
   background-repeat: no-repeat;
   background-size: cover;
   padding: 24px;
@@ -151,7 +144,7 @@ const LiveTalksContainer = styled.div`
 
       a {
         text-decoration: underline;
-        color: #eb5868;
+        color: #ebecfa;
       }
     }
 
@@ -159,8 +152,8 @@ const LiveTalksContainer = styled.div`
       margin-block: 0;
       padding-left: 0;
       border-left: none;
-      border-right: 1px solid #ebecfa;
-      padding-right: 24px;
+      // border-right: 1px solid #ebecfa;
+      // padding-right: 24px;
       height: 100%;
     }
 
@@ -224,12 +217,13 @@ const TalksGrid = styled.div`
   @media (min-width: ${breakpoints.md}) {
     grid-template-columns: repeat(2, minmax(240px, 1fr));
     gap: 20px;
+    border-left: 1px solid #ebecfa;
+    padding-left: 24px;
   }
 `
 
 const TalkCard = styled.div`
   color: #ebecfa;
-  padding: 20px;
   text-align: center;
   transition: transform 0.3s ease;
 

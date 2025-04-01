@@ -39,12 +39,12 @@ const Hero = () => {
             {isMobile ? (
               <>
                 Decentraland is a social virtual world <br /> and the home of
-                the Metaverse Fashion Week.
+                Metaverse Fashion Week.
               </>
             ) : (
               <>
-                Decentraland is a social virtual world and the home of the
-                Metaverse Fashion Week.
+                Decentraland is a social virtual world and the home of Metaverse
+                Fashion Week.
               </>
             )}
           </h2>
@@ -152,6 +152,10 @@ const HeroInnerContainer = styled.div`
     margin-top: 10px;
     padding-inline: 14px;
     margin-bottom: 100px;
+
+    .available-on-text {
+      padding-top: 0;
+    }
   }
 `
 

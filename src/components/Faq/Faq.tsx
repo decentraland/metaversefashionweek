@@ -43,7 +43,7 @@ const Faq = () => {
                 Metaverse Fashion Week will take place in Decentraland&apos;s
                 Fashion Week Plaza. Download the{" "}
                 <a
-                  href="https://decentraland.org/download"
+                  href="https://decentraland.org/download?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw25&utm_term=faq&utm_content=download"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -73,7 +73,7 @@ const Faq = () => {
                 Emotes, you can explore hundreds of unique community-made items
                 in the{" "}
                 <a
-                  href="https://decentraland.org/marketplace"
+                  href="https://decentraland.org/marketplace/?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw25&utm_term=faq&utm_content=marketplace"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -159,7 +159,7 @@ const Faq = () => {
                 little know-how and endless creative ideas! Everything you need
                 to know to start your creative journey can be found at{" "}
                 <a
-                  href="https://decentraland.org/create"
+                  href="https://decentraland.org/create?utm_org=dcl&utm_source=mvfwlanding&utm_medium=organic&utm_campaign=mvfw25&utm_term=faq&utm_content=create"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -206,7 +206,7 @@ const SectionContainer = styled.section`
 
 const FaqContainer = styled.div`
   width: 100%;
-  color: white;
+  color: #ebecfa;
   max-width: 1200px;
   margin-inline: auto;
   padding-inline: 24px;
@@ -270,7 +270,7 @@ const Question = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 18px;
-  color: white;
+  color: #ebecfa;
 
   p {
     font-family: "Inter", sans-serif !important;
@@ -291,16 +291,15 @@ const Answer = styled.div<{ $isActive: boolean }>`
   transition:
     height 0.3s ease-in-out,
     opacity 0.3s ease-in-out;
-  color: white;
   text-align: justify;
   margin-top: 20px;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(235, 236, 250, 0.8);
 
   a {
     // background: linear-gradient(90deg, #56a7ff, #fb01ff);
     text-decoration: underline;
-    color: #eb5868;
+    color: rgb(88, 122, 235);
   }
 `
 
