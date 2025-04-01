@@ -28,8 +28,8 @@ const VideoSection = () => {
       setIsMobile(mobileWidth)
       setVideoSource(
         mobileWidth
-          ? "../../src/videos/teaser-mobile.mp4"
-          : "../../src/videos/teaser-desktop-no-text.mp4"
+          ? "src/videos/teaser-mobile.mp4"
+          : "src/videos/teaser-desktop-no-text.mp4"
       )
     }
 
