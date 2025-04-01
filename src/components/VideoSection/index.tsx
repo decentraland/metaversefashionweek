@@ -52,7 +52,6 @@ const VideoSection = () => {
     if (!videoElement) return
 
     if (inView) {
-      console.log("inView and videoElement", videoElement)
       videoElement.muted = false
       videoElement.play().catch((error) => {
         console.error("Error al reproducir el video:", error)
@@ -103,7 +102,7 @@ const VideoContainer = styled.div`
 
   .mute-button {
     position: absolute;
-    top: 24px;
+    bottom: 24px;
     right: 24px;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.5);
