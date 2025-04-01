@@ -7,13 +7,6 @@ import panelSix from "../../img/talks/panel6.png"
 import panelSeven from "../../img/talks/panel7.png"
 import panelEight from "../../img/talks/panel8.png"
 
-// import diaUnoCharlaDos from "../../img/liveTalks/Day1charla2.jpg"
-// import diaDosCharlaUno from "../../img/liveTalks/Day2charla1.jpg"
-// import diaDosCharlaDos from "../../img/liveTalks/Day2charla2.jpg"
-// import diaTresCharlaUno from "../../img/liveTalks/Day3charla1.jpg"
-// import diaTresCharlaDos from "../../img/liveTalks/Day3charla2.jpg"
-// import diaCuatroCharlaUno from "../../img/liveTalks/day4-fixed.jpg"
-
 export const liveTalksData = [
   {
     image: panelOne,

@@ -14,6 +14,7 @@ const ScheduleTabs = () => {
             key={day}
             onClick={() => setActiveTab(index)}
             $isActive={activeTab === index}
+            className={"tabButton"}
           >
             {day}
           </TabButton>
@@ -60,9 +61,15 @@ const TabButton = styled.button<{ $isActive: boolean }>`
   border: 2px solid rgba(235, 236, 250, 1);
   width: 100%;
 
-  &:hover {
-    background-color: ${({ $isActive }) =>
-      $isActive ? "#ebecfa" : "rgba(15, 20, 23, 1)"};
+  &.tabButton {
+    &:hover {
+      background-color: ${({ $isActive }) =>
+        $isActive ? "#ebecfa" : "rgba(35, 40, 43, 0.8)"};
+      color: ${({ $isActive }) => ($isActive ? "#0F1417" : "#FFFFFF")};
+      transition: all 0.3s ease;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
   }
 
   @media (max-width: 568px) {
