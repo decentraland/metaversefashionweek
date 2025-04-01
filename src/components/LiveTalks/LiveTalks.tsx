@@ -144,7 +144,7 @@ const LiveTalksContainer = styled.div`
 
       a {
         text-decoration: underline;
-        color: #ebecfa;
+        color: rgb(88, 122, 235);
       }
     }
 

@@ -297,7 +297,6 @@ const Answer = styled.div<{ $isActive: boolean }>`
   color: rgba(235, 236, 250, 0.8);
 
   a {
-    // background: linear-gradient(90deg, #56a7ff, #fb01ff);
     text-decoration: underline;
     color: rgb(88, 122, 235);
   }
