@@ -1,22 +1,36 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { useInView } from "react-intersection-observer"
 import { styled } from "styled-components"
-// components
-const videoSource =
-  "https://videos.pexels.com/video-files/30207950/12951574_2560_1440_24fps.mp4"
-// assets
 
-/**
- * Componente de sección de video que muestra un video en bucle con un marquee debajo
- * @returns {JSX.Element} Componente de sección de video
- */
 const VideoSection = () => {
+  const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(
+    null
+  )
   const [isMobile, setIsMobile] = useState(false)
-  console.log(isMobile)
+  const [videoSource, setVideoSource] = useState(
+    isMobile ? "src/videos/teaser-mobile.mp4" : "src/videos/teaser-desktop.mp4"
+  )
+  const { ref: inViewRef, inView } = useInView({
+    threshold: 0,
+  })
+
+  const setRefs = useCallback(
+    (node: HTMLVideoElement | null) => {
+      setVideoElement(node)
+      inViewRef(node)
+    },
+    [inViewRef]
+  )
 
   useEffect(() => {
     const handleResize = () => {
       const mobileWidth = window.innerWidth <= 568
       setIsMobile(mobileWidth)
+      setVideoSource(
+        mobileWidth
+          ? "src/videos/teaser-mobile.mp4"
+          : "src/videos/teaser-desktop-no-text.mp4"
+      )
     }
 
     window.addEventListener("resize", handleResize)
@@ -27,10 +41,31 @@ const VideoSection = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (!videoElement) return
+
+    if (inView) {
+      console.log("inView and videoElement", videoElement)
+      videoElement.muted = false
+      videoElement.play().catch((error) => {
+        console.error("Error al reproducir el video:", error)
+        if (error.name === "NotAllowedError") {
+          videoElement.muted = true
+          videoElement.play().catch((e) => {
+            console.error("Error al reproducir el video silenciado:", e)
+          })
+        }
+      })
+    } else {
+      videoElement.muted = false
+      videoElement.pause()
+    }
+  }, [inView, videoElement, window.innerWidth])
+
   return (
     <VideoSectionContainer>
       <VideoContainer>
-        <video autoPlay muted loop playsInline src={videoSource} />
+        <video ref={setRefs} loop playsInline src={videoSource} />
       </VideoContainer>
     </VideoSectionContainer>
   )

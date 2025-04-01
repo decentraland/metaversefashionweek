@@ -65,8 +65,8 @@ const LiveTalks = () => {
             <p>{talk.description}</p>
             <p>{talk.date}</p>
             <TimeInfo>
-              <TalkTime>{talk["time-start-p"]}</TalkTime>
               <TalkTime>{talk["time-start"]}</TalkTime>
+              <TalkTime>{talk["time-start-p"]}</TalkTime>
               {/* <TalkTime>{talk["time-end"]}</TalkTime> */}
             </TimeInfo>
           </TalkCard>

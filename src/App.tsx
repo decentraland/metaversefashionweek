@@ -11,7 +11,7 @@ import { Navbar } from "./components/Navbar/Navbar"
 // CSS
 import "./css/global.css"
 import { ScheduleSection } from "./components/ScheduleSection/ScheduleSection"
-// import { VideoSection } from "./components/VideoSection"
+import { VideoSection } from "./components/VideoSection"
 // Images
 
 const App = () => {
@@ -27,10 +27,10 @@ const App = () => {
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>
-        {/* <VideoSection /> */}
-        {/* <MarqueeWrapper>
+        <VideoSection />
+        <MarqueeWrapper>
           <Marquee />
-        </MarqueeWrapper> */}
+        </MarqueeWrapper>
         <LiveTalks />
         <MarqueeWrapper>
           <Marquee />
