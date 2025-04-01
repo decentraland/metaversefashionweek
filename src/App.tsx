@@ -13,6 +13,7 @@ import "./css/global.css"
 import { ScheduleSection } from "./components/ScheduleSection/ScheduleSection"
 // import { VideoSection } from "./components/VideoSection"
 // Images
+
 const App = () => {
   return (
     <div className="app-container">
