@@ -9,9 +9,9 @@ const VideoSection = () => {
     null
   )
   const [isMobile, setIsMobile] = useState(false)
-  const [videoSource, setVideoSource] = useState(
-    isMobile ? videoMobile : videoDesktopNoText
-  )
+  // const [videoSource, setVideoSource] = useState(
+  //   isMobile ? videoMobile : videoDesktopNoText
+  // )
   const { ref: inViewRef, inView } = useInView({
     threshold: 0,
   })
@@ -28,7 +28,7 @@ const VideoSection = () => {
     const handleResize = () => {
       const mobileWidth = window.innerWidth <= 568
       setIsMobile(mobileWidth)
-      setVideoSource(mobileWidth ? videoMobile : videoDesktopNoText)
+      // setVideoSource(mobileWidth ? videoMobile : videoDesktopNoText)
     }
 
     window.addEventListener("resize", handleResize)
@@ -63,7 +63,12 @@ const VideoSection = () => {
   return (
     <VideoSectionContainer>
       <VideoContainer>
-        <video ref={setRefs} loop playsInline src={videoSource} />
+        <video
+          ref={setRefs}
+          loop
+          playsInline
+          src={isMobile ? videoMobile : videoDesktopNoText}
+        />
       </VideoContainer>
     </VideoSectionContainer>
   )
