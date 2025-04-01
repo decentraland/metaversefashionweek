@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { styled } from "styled-components"
+import { Carousel } from "./Carousel"
 import bgImage from "../../img/misc/background.webp"
 import valuePropCentral from "../../img/misc/value-prop-central.png"
 import LeftNavbarIconSrc from "../../img/vectors/iconos-header-left.svg?url"
@@ -57,6 +58,7 @@ const Hero = () => {
           <img src={LeftNavbarIconSrc} alt="Decentraland Fashion Festival" />
         </div>
       </HeroInnerContainer>
+      <Carousel />
     </HeroContainer>
   )
 }
