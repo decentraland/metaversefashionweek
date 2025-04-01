@@ -1,4 +1,6 @@
 // Styled Components
+import { useEffect, useRef } from "react"
+import Lenis from "lenis"
 import { styled } from "styled-components"
 // Components
 import { Faq } from "./components/Faq/Faq"
@@ -15,6 +17,31 @@ import { VideoSection } from "./components/VideoSection"
 // Images
 
 const App = () => {
+  const lenisRef = useRef<Lenis | null>(null)
+
+  useEffect(() => {
+    // Inicializar Lenis para scroll suave
+    lenisRef.current = new Lenis({
+      duration: 1.8,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      touchMultiplier: 2,
+    })
+
+    // Función para actualizar Lenis en cada frame
+    const raf = (time: number) => {
+      lenisRef.current?.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    // Iniciar el loop de animación
+    requestAnimationFrame(raf)
+
+    // Limpiar al desmontar
+    return () => {
+      lenisRef.current?.destroy()
+    }
+  }, [])
+
   return (
     <div className="app-container">
       <Navbar />

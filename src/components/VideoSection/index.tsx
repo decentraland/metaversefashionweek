@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
+import { IoVolumeHigh, IoVolumeMute } from "react-icons/io5"
 import { styled } from "styled-components"
 
 // Rutas de los videos usando la carpeta public
@@ -11,6 +12,7 @@ const VideoSection = () => {
     null
   )
   const [isMobile, setIsMobile] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
   // const [videoSource, setVideoSource] = useState(
   //   isMobile ? videoMobile : videoDesktopNoText
   // )
@@ -43,6 +45,11 @@ const VideoSection = () => {
 
   useEffect(() => {
     if (!videoElement) return
+    videoElement.muted = isMuted
+  }, [isMuted, videoElement])
+
+  useEffect(() => {
+    if (!videoElement) return
 
     if (inView) {
       console.log("inView and videoElement", videoElement)
@@ -65,10 +72,14 @@ const VideoSection = () => {
   return (
     <VideoSectionContainer>
       <VideoContainer>
+        <button className="mute-button" onClick={() => setIsMuted(!isMuted)}>
+          {isMuted ? <IoVolumeMute /> : <IoVolumeHigh />}
+        </button>
         <video
           ref={setRefs}
           loop
           playsInline
+          muted={isMuted}
           src={isMobile ? videoMobile : videoDesktopNoText}
         />
       </VideoContainer>
@@ -88,6 +99,30 @@ const VideoContainer = styled.div`
   flex: 1;
   width: 100%;
   overflow: hidden;
+  position: relative;
+
+  .mute-button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
 
   video {
     width: 100%;
