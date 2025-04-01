@@ -42,8 +42,8 @@
 }
 
 .custom-bullet-list li > * {
-  color: white;
-  /* Ensure the text is white */
+  color: #ebecfa;
+  /* Ensure the text is #ebecfa */
   margin-left: 0;
   /* No extra space */
   flex: 1;
@@ -53,8 +53,8 @@
 .custom-bullet-list li > TextHighlight {
   font-weight: 700;
   /* Highlighted text bold */
-  color: white;
-  /* Highlighted text also white */
+  color: #ebecfa;
+  /* Highlighted text also #ebecfa */
 }
 
 /* Mobile Optimization */

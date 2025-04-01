@@ -1,13 +1,25 @@
-import { FaInstagram, FaXTwitter } from "react-icons/fa6"
+import { FaDiscord, FaInstagram, FaXTwitter } from "react-icons/fa6"
 import { styled } from "styled-components"
+import decentralandLogo from "../../img/faq/logo.png"
 import logo from "../../img/misc/logo.png"
-import iconsHeaderLeft from "../../img/vectors/iconos-header-left.svg?url"
+
 const Navbar = () => {
   return (
     <NavbarContainer>
       <div className="navbar-inner">
         <div className="navbar-left">
-          <img src={iconsHeaderLeft} alt="icons-header-left" />
+          <img src={decentralandLogo} alt="decentraland-logo" />
+          <div className="navbar-navigation">
+            <span>
+              <a href="#schedule">Schedule</a>
+            </span>
+            <span>
+              <a href="#faq">FAQ</a>
+            </span>
+            <span>
+              <a href="#talks">Talks</a>
+            </span>
+          </div>
         </div>
         <div className="navbar-right">
           <a
@@ -34,6 +46,13 @@ const Navbar = () => {
             >
               <FaXTwitter />
             </SocialIcon>
+            <SocialIcon
+              href="https://decentraland.org/discord/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaDiscord />
+            </SocialIcon>
           </div>
         </div>
       </div>
@@ -56,7 +75,7 @@ const NavbarContainer = styled.div`
     max-width: 1240px;
     height: 100%;
     margin: 0 auto;
-    border-bottom: 1px solid #ebecfa;
+    // border-bottom: 1px solid #ebecfa;
     padding-block: 8px;
 
     @media screen and (max-width: 568px) {
@@ -66,6 +85,9 @@ const NavbarContainer = styled.div`
     .navbar-left {
       width: fill-available;
       height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
       img {
         width: 100%;
@@ -77,6 +99,26 @@ const NavbarContainer = styled.div`
 
       @media screen and (max-width: 568px) {
         display: none;
+      }
+
+      .navbar-navigation {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-left: 24px;
+
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+
+        span {
+          a {
+            text-decoration: none;
+            color: #ebecfa;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+          }
+        }
       }
     }
 
