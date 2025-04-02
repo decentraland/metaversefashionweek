@@ -235,7 +235,7 @@ const LeftContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-top: 920px;
+    margin-top: 900px;
 
     @media screen and (max-width: ${breakpoints.md}) {
       display: none;
@@ -261,6 +261,11 @@ const QuestionContainer = styled.div`
   margin-bottom: 20px;
   padding-block: 50px;
   border-bottom: 1px solid rgba(235, 236, 250, 1);
+
+  &:last-of-type {
+    margin-bottom: 0;
+    border-bottom: 2px solid rgba(235, 236, 250, 1);
+  }
 `
 
 const Question = styled.div`
@@ -284,15 +289,18 @@ const Question = styled.div`
 `
 
 const Answer = styled.div<{ $isActive: boolean }>`
-  height: ${(props) => (props.$isActive ? "auto" : "0")};
-  display: ${(props) => (props.$isActive ? "block" : "none")};
+  max-height: ${(props) => (props.$isActive ? "1000px" : "0")};
   opacity: ${(props) => (props.$isActive ? "1" : "0")};
+  pointer-events: ${(props) => (props.$isActive ? "auto" : "none")};
+  margin-top: ${(props) => (props.$isActive ? "20px" : "0")};
   overflow: hidden;
   transition:
-    height 0.3s ease-in-out,
-    opacity 0.3s ease-in-out;
+    max-height 0.2s ease-in-out,
+    opacity 0.3s ease-in-out,
+    margin-top 0.3s ease-in-out;
+  will-change: max-height, opacity;
+
   text-align: justify;
-  margin-top: 20px;
   font-size: 16px;
   color: rgba(235, 236, 250, 0.8);
 

@@ -123,24 +123,27 @@ const LiveTalksContainer = styled.div`
     border-left: 1px solid #ebecfa;
     margin-block: 24px;
     height: 100%;
-    max-width: 360px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     h2 {
       font-size: 32px;
       font-weight: 700;
       color: #ebecfa;
       letter-spacing: 0.04em;
-      text-align: right;
+      text-align: left;
     }
 
     h5 {
       font-size: 18px;
       font-weight: 400;
       color: #ebecfa;
-      max-width: 350px;
       letter-spacing: 0.06em;
-      text-align: right;
+      text-align: left;
       margin-block: 12px;
+      max-width: 360px;
 
       a {
         text-decoration: underline;
@@ -149,11 +152,24 @@ const LiveTalksContainer = styled.div`
     }
 
     @media (min-width: ${breakpoints.l}) {
+      max-width: 360px;
+      text-align: right;
+      align-items: flex-end;
+
+      h5 {
+        text-align: right;
+        max-width: 350px;
+      }
+
+      h2 {
+        text-align: right;
+      }
+    }
+
+    @media (min-width: ${breakpoints.l}) {
       margin-block: 0;
       padding-left: 0;
       border-left: none;
-      // border-right: 1px solid #ebecfa;
-      // padding-right: 24px;
       height: 100%;
     }
 
