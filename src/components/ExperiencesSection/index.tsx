@@ -5,7 +5,8 @@ const ExperiencesSection = () => {
   return (
     <Container>
       <InnerContainer>
-        <Runways />
+        <Runways useMode="runways" />
+        <Runways useMode="experiences" />
       </InnerContainer>
     </Container>
   )

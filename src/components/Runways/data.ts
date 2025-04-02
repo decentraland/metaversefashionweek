@@ -1,3 +1,6 @@
+import experience2 from "../../img/experiences/entangled.png"
+import experience1 from "../../img/experiences/offWorld.png"
+import experience3 from "../../img/experiences/standOut.png"
 import runway1 from "../../img/runways/cyberdog.png"
 import runway4 from "../../img/runways/dclJapan.png"
 import runway2 from "../../img/runways/freeTheYouth.png"
@@ -15,7 +18,7 @@ interface Runway {
 }
 
 // Runway data
-export const runwaysData: Runway[] = [
+const runwaysData: Runway[] = [
   {
     id: 1,
     image: runway1,
@@ -65,3 +68,32 @@ export const runwaysData: Runway[] = [
       "The Wearables Around the World Showcase celebrates fashion as cultural storytelling. Ten winning designs inspired by heritage and innovation debut in a live-streamed catwalk, presenting a powerful vision of how virtual fashion connects global creativity.",
   },
 ]
+
+const experiencesData = [
+  {
+    id: 1,
+    image: experience1,
+    title: "OFF-WORLD Galactic Expansion by The Immersive KIND",
+    location: "[-8,88]",
+    description:
+      "An intergalactic experience on hyper-intelligent fashion for MARS and the MOON, where unreal models embody robotics couture, AI-generated beauty, and futuristic self-expression. Featuring The Immersive KIND x Sapiensi x Shaokai Chen x Lucy Wheeler x Marcela Castile. As a pioneering XR studio and digital arts collective, The Immersive KIND pushes the boundaries of fashion, gaming, and storytelling—shaping the future of identity in the metaverse and beyond.",
+  },
+  {
+    id: 2,
+    image: experience2,
+    title: "Entangled Q by Cansy",
+    location: "[-8,74]",
+    description:
+      "A multi-layered art installation which uses NPC avatars to liken identity to quantum phenomena.The NPCs simultaneously embody infinite states of identity, dynamically morphing their appearance to reflect whoever enters the scene. Developed by award-winning artist-coder, Cansy.",
+  },
+  {
+    id: 3,
+    image: experience3,
+    title: "Stand Out by Stom",
+    location: "[-6,88]",
+    description:
+      "An interactive fashion game, where players compete on a catwalk stage by showcasing their digital wearables. Created by developer and 3D designer Stom to celebrate digital self-expression by turning avatars into performers.",
+  },
+]
+
+export { runwaysData, experiencesData }

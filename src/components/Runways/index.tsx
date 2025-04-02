@@ -1,28 +1,53 @@
 import { useRef, useState } from "react"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 import styled from "styled-components"
-import { runwaysData } from "./data"
+import { experiencesData, runwaysData } from "./data"
 
-const Runways = () => {
+interface RunwaysProps {
+  useMode: "runways" | "experiences"
+}
+
+const Runways = ({ useMode = "runways" }: RunwaysProps) => {
   const [currentRunway, setCurrentRunway] = useState(0)
+  const [currentExperience, setCurrentExperience] = useState(0)
   const runwayRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const handleRunwayChange = (index: number) => {
-    setCurrentRunway(index - 1)
-    scrollToRunway(index - 1)
+    if (useMode === "runways") {
+      setCurrentRunway(index - 1)
+      scrollToRunway(index - 1)
+    } else {
+      setCurrentExperience(index - 1)
+      scrollToExperience(index - 1)
+    }
   }
 
   const handleNextRunway = () => {
-    if (currentRunway < runwaysData.length - 1) {
-      setCurrentRunway(currentRunway + 1)
-      scrollToRunway(currentRunway + 1)
+    if (
+      currentRunway <
+      (useMode === "runways" ? runwaysData.length : experiencesData.length) - 1
+    ) {
+      if (useMode === "runways") {
+        setCurrentRunway(currentRunway + 1)
+        scrollToRunway(currentRunway + 1)
+      } else {
+        setCurrentExperience(currentExperience + 1)
+        scrollToExperience(currentExperience + 1)
+      }
     }
   }
 
   const handlePreviousRunway = () => {
-    if (currentRunway > 0) {
-      setCurrentRunway(currentRunway - 1)
-      scrollToRunway(currentRunway - 1)
+    if (useMode === "runways") {
+      if (currentRunway > 0) {
+        setCurrentRunway(currentRunway - 1)
+        scrollToRunway(currentRunway - 1)
+      }
+    } else {
+      if (currentExperience > 0) {
+        setCurrentExperience(currentExperience - 1)
+        scrollToExperience(currentExperience - 1)
+      }
     }
   }
 
@@ -37,22 +62,43 @@ const Runways = () => {
     }
   }
 
+  const scrollToExperience = (index: number) => {
+    const element = runwayRefs.current[index]
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      })
+    }
+  }
+
   return (
     <Container>
       <div className="header">
         <div className="header__left">
-          <h2>6 Runways</h2>
+          <h2>
+            {useMode === "runways" ? "6 Runways" : "Interactive Experiences"}
+          </h2>
           <span className="actions">
             <button
               className="action-button"
-              disabled={currentRunway === 0}
+              disabled={
+                useMode === "runways"
+                  ? currentRunway === 0
+                  : currentExperience === 0
+              }
               onClick={handlePreviousRunway}
             >
               <FaChevronLeft fill="#000" />
             </button>
             <button
               className="action-button"
-              disabled={currentRunway === runwaysData.length - 1}
+              disabled={
+                useMode === "runways"
+                  ? currentRunway === runwaysData.length - 1
+                  : currentExperience === experiencesData.length - 1
+              }
               onClick={handleNextRunway}
             >
               <FaChevronRight fill="#000" />
@@ -60,26 +106,53 @@ const Runways = () => {
           </span>
         </div>
         <div className="header__right">
-          <h2>{runwaysData[currentRunway].title}</h2>
-          <p>{runwaysData[currentRunway].description}</p>
+          <h2>
+            {useMode === "runways"
+              ? runwaysData[currentRunway].title
+              : experiencesData[currentExperience].title}
+          </h2>
+          <p>
+            {useMode === "runways"
+              ? runwaysData[currentRunway].description
+              : experiencesData[currentExperience].description}
+          </p>
         </div>
       </div>
-      <RunwaysContainer>
-        {runwaysData.map((runway, index) => (
-          <div
-            ref={(el) => (runwayRefs.current[index] = el)}
-            className={`runway__item ${
-              currentRunway === runway.id - 1 ? "active" : ""
-            }`}
-            key={runway.id}
-            onClick={() => handleRunwayChange(runway.id)}
-          >
-            <img src={runway.image} alt={runway.title} />
-            <h2>{runway.title}</h2>
-            <p>{runway.location}</p>
-          </div>
-        ))}
-      </RunwaysContainer>
+      {useMode === "runways" ? (
+        <RunwaysContainer>
+          {runwaysData.map((runway, index) => (
+            <div
+              ref={(el) => (runwayRefs.current[index] = el)}
+              className={`runway__item ${
+                currentRunway === runway.id - 1 ? "active" : ""
+              }`}
+              key={runway.id}
+              onClick={() => handleRunwayChange(runway.id)}
+            >
+              <img src={runway.image} alt={runway.title} />
+              <h2>{runway.title}</h2>
+              <p>{runway.location}</p>
+            </div>
+          ))}
+        </RunwaysContainer>
+      ) : null}
+      {useMode === "experiences" ? (
+        <ExperiencesContainer>
+          {experiencesData.map((experience) => (
+            <div
+              key={experience.id}
+              className={`experience__item ${
+                currentExperience === experience.id - 1 ? "active" : ""
+              }`}
+              onClick={() => handleRunwayChange(experience.id)}
+            >
+              <img src={experience.image} alt={experience.title} />
+              <h2>{experience.title}</h2>
+              <p>{experience.location}</p>
+            </div>
+          ))}
+        </ExperiencesContainer>
+      ) : null}
     </Container>
   )
 }
@@ -101,7 +174,6 @@ const Container = styled.div`
     gap: 24px;
     width: 100%;
     height: 100%;
-    // max-width: 70%;
 
     .header__left {
       display: flex;
@@ -183,6 +255,66 @@ const RunwaysContainer = styled.div`
     height: 100%;
     cursor: pointer;
     min-width: 220px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-in-out;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h2 {
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #ebecfa;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    p {
+      font-size: 14px;
+      color: #ebecfa;
+      font-weight: 400;
+      margin-top: 6px;
+    }
+
+    &.active {
+      opacity: 1;
+      transform: translateY(-10px);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    @media (min-width: 1024px) {
+      min-width: unset;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+`
+
+const ExperiencesContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-block: 24px;
+
+  .experience__item {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    min-width: 220px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease-in-out;
+    max-width: 220px;
 
     img {
       width: 100%;
@@ -207,6 +339,7 @@ const RunwaysContainer = styled.div`
     }
 
     &.active {
+      opacity: 1;
       transform: translateY(-10px);
       transition: transform 0.3s ease-in-out;
     }
@@ -215,10 +348,5 @@ const RunwaysContainer = styled.div`
       min-width: unset;
     }
   }
-
-  @media (min-width: 768px) {
-    flex-wrap: nowrap;
-  }
 `
-
 export { Runways }
