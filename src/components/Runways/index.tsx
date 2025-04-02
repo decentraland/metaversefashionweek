@@ -2,6 +2,7 @@ import { useRef, useState } from "react"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 import styled from "styled-components"
 import { experiencesData, runwaysData } from "./data"
+import { breakpoints } from "../../utils/theme"
 
 interface RunwaysProps {
   useMode: "runways" | "experiences"
@@ -11,6 +12,7 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
   const [currentRunway, setCurrentRunway] = useState(0)
   const [currentExperience, setCurrentExperience] = useState(0)
   const runwayRefs = useRef<(HTMLDivElement | null)[]>([])
+  const experienceRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const handleRunwayChange = (index: number) => {
     if (useMode === "runways") {
@@ -63,7 +65,7 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
   }
 
   const scrollToExperience = (index: number) => {
-    const element = runwayRefs.current[index]
+    const element = experienceRefs.current[index]
     if (element) {
       element.scrollIntoView({
         behavior: "smooth",
@@ -138,13 +140,14 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
       ) : null}
       {useMode === "experiences" ? (
         <ExperiencesContainer>
-          {experiencesData.map((experience) => (
+          {experiencesData.map((experience, index) => (
             <div
               key={experience.id}
               className={`experience__item ${
                 currentExperience === experience.id - 1 ? "active" : ""
               }`}
               onClick={() => handleRunwayChange(experience.id)}
+              ref={(el) => (experienceRefs.current[index] = el)}
             >
               <img src={experience.image} alt={experience.title} />
               <h2>{experience.title}</h2>
@@ -169,18 +172,19 @@ const Container = styled.div`
 
   .header {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 24px;
     width: 100%;
     height: 100%;
 
     .header__left {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
+      justify-content: space-between;
+      align-items: center;
       gap: 24px;
+      width: 100%;
 
       .actions {
         display: flex;
@@ -217,10 +221,6 @@ const Container = styled.div`
       @media (min-width: 568px) {
         min-width: 160px;
       }
-
-      @media (min-width: 768px) {
-        min-width: 200px;
-      }
     }
 
     .header__right {
@@ -232,6 +232,23 @@ const Container = styled.div`
       padding-left: 24px;
       border-left: 1px solid white;
       height: 100%;
+
+      @media (min-width: ${breakpoints.md}) {
+        max-width: 700px;
+      }
+    }
+
+    @media (min-width: ${breakpoints.md}) {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+
+      .header__left {
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        max-width: 200px;
+      }
     }
   }
 `
@@ -249,6 +266,8 @@ const RunwaysContainer = styled.div`
   scroll-behavior: smooth;
   transition: transform 0.3s ease-in-out;
   will-change: transform;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   .runway__item {
     width: 100%;
@@ -298,7 +317,7 @@ const RunwaysContainer = styled.div`
 const ExperiencesContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   width: 100%;
   height: 100%;
@@ -306,15 +325,28 @@ const ExperiencesContainer = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-block: 24px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  @media (min-width: ${breakpoints.md}) {
+    justify-content: center;
+  }
 
   .experience__item {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    min-width: 220px;
     opacity: 0.6;
     transition: opacity 0.3s ease-in-out;
-    max-width: 220px;
+    min-width: 180px;
+
+    @media (min-width: ${breakpoints.md}) {
+      min-width: 220px;
+      max-width: 280px;
+    }
 
     img {
       width: 100%;
@@ -324,7 +356,7 @@ const ExperiencesContainer = styled.div`
 
     h2 {
       margin-top: 12px;
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 400;
       color: #ebecfa;
       text-transform: uppercase;

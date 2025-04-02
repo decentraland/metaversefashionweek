@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { ExperiencesSectionInfo } from "../ExperiencesSectionInfo/ExperiencesSectionInfo"
 import { Runways } from "../Runways"
 
 const ExperiencesSection = () => {
@@ -6,6 +7,7 @@ const ExperiencesSection = () => {
     <Container>
       <InnerContainer>
         <Runways useMode="runways" />
+        <ExperiencesSectionInfo />
         <Runways useMode="experiences" />
       </InnerContainer>
     </Container>

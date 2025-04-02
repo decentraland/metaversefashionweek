@@ -19,12 +19,12 @@ const Faq = () => {
   return (
     <SectionContainer>
       <LeftContainer>
-        <h2>
+        <h2 className="mobile-hidden">
           <span>Frequently</span> <span>Asked Questions</span>
         </h2>
         <img src={faqImage} alt="FAQ" />
       </LeftContainer>
-      <FaqContainer id="faq">
+      <RightContainer id="faq">
         <Title>Frequently Asked Questions</Title>
         {[
           {
@@ -182,7 +182,7 @@ const Faq = () => {
             <Answer $isActive={activeIndex === index}>{item.answer()}</Answer>
           </QuestionContainer>
         ))}
-      </FaqContainer>
+      </RightContainer>
     </SectionContainer>
   )
 }
@@ -197,30 +197,40 @@ const SectionContainer = styled.section`
   padding-inline: 32px;
   margin-block: 120px;
   max-width: 1200px;
-  height: auto;
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
 
   @media screen and (min-width: ${breakpoints.md}) {
     flex-direction: row;
   }
 `
 
-const FaqContainer = styled.div`
+const RightContainer = styled.div`
   width: 100%;
   color: #ebecfa;
   max-width: 1200px;
   margin-inline: auto;
+  height: 100%;
   padding-inline: 24px;
   border-left: 2px solid rgba(235, 236, 250, 1);
 `
 
 const LeftContainer = styled.div`
-  height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   flex-direction: column;
   padding-bottom: 24px;
   padding-right: 24px;
+
+  .mobile-hidden {
+    display: none;
+
+    @media screen and (min-width: ${breakpoints.md}) {
+      display: block;
+    }
+  }
 
   h2 {
     font-size: 24px;
@@ -235,7 +245,7 @@ const LeftContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-top: 900px;
+    margin-top: 0 auto;
 
     @media screen and (max-width: ${breakpoints.md}) {
       display: none;
