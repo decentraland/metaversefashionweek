@@ -107,7 +107,11 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
             </button>
           </span>
         </div>
-        <div className="header__right">
+        <div
+          className={`header__right ${
+            useMode === "runways" ? "runways" : "experiences"
+          }`}
+        >
           <h2>
             {useMode === "runways"
               ? runwaysData[currentRunway].title
@@ -232,6 +236,12 @@ const Container = styled.div`
       padding-left: 24px;
       border-left: 1px solid white;
       height: 100%;
+      min-height: fit-content;
+
+      &.experiences {
+        min-height: max-content;
+        will-change: transform;
+      }
 
       @media (min-width: ${breakpoints.md}) {
         max-width: 700px;
