@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react"
 import Lenis from "lenis"
 import { styled } from "styled-components"
 // Components
+import { ExperiencesSection } from "./components/ExperiencesSection"
 import { Faq } from "./components/Faq/Faq"
 import { Footer } from "./components/Footer/Footer"
 import { Hero } from "./components/Hero/Hero"
@@ -62,7 +63,11 @@ const App = () => {
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>
-        {/* <Map /> */}
+        <ExperiencesSection />
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+
         <Faq />
         <Footer />
       </AppContainer>

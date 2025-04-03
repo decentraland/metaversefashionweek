@@ -1,78 +1,98 @@
+import { useState } from "react"
 import { styled } from "styled-components"
 import { liveTalksData } from "./data"
 import iconsTalks from "../../img/vectors/logos-talks.svg?url"
 import iconTalksSingle from "../../img/vectors/talksico.svg?url"
 import { breakpoints } from "../../utils/theme"
 import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+import { Modal } from "../Modal"
 
 const LiveTalks = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalImageUrl, setModalImageUrl] = useState("")
+
   return (
-    <LiveTalksContainer id="talks">
-      <div className="live-talks-header">
-        <h2>Insider Career Talks</h2>
-        <h5>
-          All talks will be live-streamed in{" "}
-          <a
-            href="https://decentraland.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Decentraland
-          </a>
-          ,{" "}
-          <a
-            href="https://x.com/decentraland
+    <>
+      <LiveTalksContainer id="talks">
+        <div className="live-talks-header">
+          <h2>Insider Career Talks</h2>
+          <h5>
+            All talks will be live-streamed in{" "}
+            <a
+              href="https://decentraland.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Decentraland
+            </a>
+            ,{" "}
+            <a
+              href="https://x.com/decentraland
 "
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            X
-          </a>
-          ,{" "}
-          <a
-            href="https://www.youtube.com/@decentraland_foundation"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            YouTube
-          </a>{" "}
-          and{" "}
-          <a
-            href="https://www.linkedin.com/company/decentralandorg"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </a>
-        </h5>
-        <div className="header-desktop">
-          <img src={iconTalksSingle} alt="Talks Single" />
-          <p>
-            All content will repeat in world starting at Midnight UTC the
-            following day
-          </p>
-          <div className="header-desktop-icons">
-            <img src={iconsTalks} alt="LinkedIn" />
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              X
+            </a>
+            ,{" "}
+            <a
+              href="https://www.youtube.com/@decentraland_foundation"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              YouTube
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://www.linkedin.com/company/decentralandorg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </h5>
+          <div className="header-desktop">
+            <img src={iconTalksSingle} alt="Talks Single" />
+            <p>
+              All content will repeat in world starting at Midnight UTC the
+              following day
+            </p>
+            <div className="header-desktop-icons">
+              <img src={iconsTalks} alt="LinkedIn" />
+            </div>
+            <DownloadBtn showAvailableOnText={false} />
           </div>
-          <DownloadBtn showAvailableOnText={false} />
         </div>
-      </div>
-      <TalksGrid>
-        {liveTalksData.map((talk, index) => (
-          <TalkCard key={index}>
-            <img src={talk.image} alt={talk.title} />
-            <h3>{talk.title}:</h3>
-            <p>{talk.description}</p>
-            <p>{talk.date}</p>
-            <TimeInfo>
-              <TalkTime>{talk["time-start"]}</TalkTime>
-              <TalkTime>{talk["time-start-p"]}</TalkTime>
-              {/* <TalkTime>{talk["time-end"]}</TalkTime> */}
-            </TimeInfo>
-          </TalkCard>
-        ))}
-      </TalksGrid>
-    </LiveTalksContainer>
+        <TalksGrid>
+          {liveTalksData.map((talk, index) => (
+            <TalkCard key={index}>
+              <img
+                src={talk.image}
+                alt={talk.title}
+                onClick={() => {
+                  setIsModalOpen(true)
+                  setModalImageUrl(talk.image)
+                }}
+              />
+              <h3>{talk.title}:</h3>
+              <p>{talk.description}</p>
+              <p>{talk.date}</p>
+              <TimeInfo>
+                <TalkTime>{talk["time-start"]}</TalkTime>
+                <TalkTime>{talk["time-start-p"]}</TalkTime>
+                {/* <TalkTime>{talk["time-end"]}</TalkTime> */}
+              </TimeInfo>
+            </TalkCard>
+          ))}
+        </TalksGrid>
+      </LiveTalksContainer>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        imageUrl={modalImageUrl}
+        alt="Modal Image"
+      />
+    </>
   )
 }
 
@@ -123,24 +143,27 @@ const LiveTalksContainer = styled.div`
     border-left: 1px solid #ebecfa;
     margin-block: 24px;
     height: 100%;
-    max-width: 360px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     h2 {
       font-size: 32px;
       font-weight: 700;
       color: #ebecfa;
       letter-spacing: 0.04em;
-      text-align: right;
+      text-align: left;
     }
 
     h5 {
       font-size: 18px;
       font-weight: 400;
       color: #ebecfa;
-      max-width: 350px;
       letter-spacing: 0.06em;
-      text-align: right;
+      text-align: left;
       margin-block: 12px;
+      max-width: 360px;
 
       a {
         text-decoration: underline;
@@ -149,11 +172,24 @@ const LiveTalksContainer = styled.div`
     }
 
     @media (min-width: ${breakpoints.l}) {
+      max-width: 360px;
+      text-align: right;
+      align-items: flex-end;
+
+      h5 {
+        text-align: right;
+        max-width: 350px;
+      }
+
+      h2 {
+        text-align: right;
+      }
+    }
+
+    @media (min-width: ${breakpoints.l}) {
       margin-block: 0;
       padding-left: 0;
       border-left: none;
-      // border-right: 1px solid #ebecfa;
-      // padding-right: 24px;
       height: 100%;
     }
 
@@ -233,6 +269,13 @@ const TalkCard = styled.div`
     object-fit: cover;
     aspect-ratio: 16/9;
     border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    &:hover {
+      transform: scale(1.03);
+      transition: transform 0.3s ease;
+    }
   }
 
   h3 {
@@ -250,14 +293,17 @@ const TalkCard = styled.div`
   }
 
   @media (max-width: ${breakpoints.md}) {
-    padding: 15px;
+    padding: 0;
 
     h3 {
       font-size: 20px;
+      letter-spacing: 0.05em;
     }
 
     p {
       font-size: 14px;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
     }
 
     img {
@@ -268,6 +314,7 @@ const TalkCard = styled.div`
 
 const TalkTime = styled.p`
   font-weight: 400 !important;
+  letter-spacing: 0.05em;
 `
 
 const TimeInfo = styled.div`

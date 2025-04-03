@@ -156,18 +156,12 @@ const ExperiencesSectionInfoContainer = styled.div`
 
         h4 {
           font-size: 18px;
-          opacity: 0.8;
           font-weight: bold;
           color: #ebecfa;
           letter-spacing: 0.05em;
         }
       }
     }
-
-    // @media (min-width: ${breakpoints.md}) {
-    //   border-left: 1px solid #ebecfa;
-    //   padding-left: 24px;
-    // }
   }
 `
 
