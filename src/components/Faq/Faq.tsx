@@ -14,11 +14,23 @@ const Faq = () => {
 
   const toggleAnswer = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
+    console.log("activeIndex", activeIndex)
+  }
+
+  const getMarginTop = (index: number) => {
+    if (activeIndex === null) return 0
+    if (index === 0) return 34
+    if (index === 1) return 106
+    if (index === 2) return 120
+    if (index === 3) return 178
+    if (index === 4) return 52
+    if (index === 5) return 56
+    return 0
   }
 
   return (
     <SectionContainer>
-      <LeftContainer>
+      <LeftContainer $marginTop={getMarginTop(activeIndex ?? 0)}>
         <h2 className="mobile-hidden">
           <span>Frequently</span> <span>Asked Questions</span>
         </h2>
@@ -216,7 +228,7 @@ const RightContainer = styled.div`
   border-left: 2px solid rgba(235, 236, 250, 1);
 `
 
-const LeftContainer = styled.div`
+const LeftContainer = styled.div<{ $marginTop: number }>`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -245,7 +257,10 @@ const LeftContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-top: 0 auto;
+    transition: all 0.3s ease-in-out;
+    will-change: transform;
+    // margin-top: 900px;
+    margin-top: calc(900px + ${(props) => props.$marginTop}px);
 
     @media screen and (max-width: ${breakpoints.md}) {
       display: none;
