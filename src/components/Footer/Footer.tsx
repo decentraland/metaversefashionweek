@@ -66,9 +66,8 @@ const Footer = () => {
 const StyledFooter = styled.section`
   display: flex;
   justify-content: space-between;
-  background-color: #0f1417;
+  background-color: #000000;
   width: 100%;
-  border-top: 1px solid #ebecfa;
 `
 
 const FooterLeft = styled.div`
@@ -87,7 +86,7 @@ const FooterRight = styled.div`
 `
 
 const FooterText = styled.a`
-  color: #ebecfa;
+  color: #efefef;
   font-size: 12px;
   font-weight: 700;
   font-family: "InterMedium", sans-serif;

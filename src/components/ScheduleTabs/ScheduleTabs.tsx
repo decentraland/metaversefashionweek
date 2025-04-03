@@ -73,7 +73,7 @@ const TabButton = styled.button<{ $isActive: boolean }>`
   }
 
   @media (max-width: 568px) {
-    padding: 8px;
+    padding: 8px 16px;
     font-size: 16px;
     width: 100%;
   }
@@ -111,7 +111,6 @@ const List = styled.ul`
   gap: 16px;
   flex: 1;
   flex-wrap: wrap;
-  letter-spacing: 0.02em;
 `
 
 const ListItem = styled.li`
@@ -127,14 +126,11 @@ const ListItem = styled.li`
     &:first-child {
       font-weight: 700;
       font-size: 14px;
-      flex: 1;
-      opacity: 0.8;
     }
 
     &:last-child {
       font-weight: 400;
-      font-size: 16px;
-      flex: 2;
+      font-size: 18px;
     }
   }
 `

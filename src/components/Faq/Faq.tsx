@@ -19,12 +19,12 @@ const Faq = () => {
   return (
     <SectionContainer>
       <LeftContainer>
-        <h2 className="mobile-hidden">
+        <h2>
           <span>Frequently</span> <span>Asked Questions</span>
         </h2>
         <img src={faqImage} alt="FAQ" />
       </LeftContainer>
-      <RightContainer id="faq">
+      <FaqContainer id="faq">
         <Title>Frequently Asked Questions</Title>
         {[
           {
@@ -182,7 +182,7 @@ const Faq = () => {
             <Answer $isActive={activeIndex === index}>{item.answer()}</Answer>
           </QuestionContainer>
         ))}
-      </RightContainer>
+      </FaqContainer>
     </SectionContainer>
   )
 }
@@ -197,40 +197,30 @@ const SectionContainer = styled.section`
   padding-inline: 32px;
   margin-block: 120px;
   max-width: 1200px;
-  min-height: 100vh;
-  height: 100%;
-  position: relative;
+  height: auto;
 
   @media screen and (min-width: ${breakpoints.md}) {
     flex-direction: row;
   }
 `
 
-const RightContainer = styled.div`
+const FaqContainer = styled.div`
   width: 100%;
   color: #ebecfa;
   max-width: 1200px;
   margin-inline: auto;
-  height: 100%;
   padding-inline: 24px;
   border-left: 2px solid rgba(235, 236, 250, 1);
 `
 
 const LeftContainer = styled.div`
+  height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   flex-direction: column;
   padding-bottom: 24px;
   padding-right: 24px;
-
-  .mobile-hidden {
-    display: none;
-
-    @media screen and (min-width: ${breakpoints.md}) {
-      display: block;
-    }
-  }
 
   h2 {
     font-size: 24px;
@@ -245,7 +235,7 @@ const LeftContainer = styled.div`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    margin-top: 0 auto;
+    margin-top: 920px;
 
     @media screen and (max-width: ${breakpoints.md}) {
       display: none;
@@ -271,11 +261,6 @@ const QuestionContainer = styled.div`
   margin-bottom: 20px;
   padding-block: 50px;
   border-bottom: 1px solid rgba(235, 236, 250, 1);
-
-  &:last-of-type {
-    margin-bottom: 0;
-    border-bottom: 2px solid rgba(235, 236, 250, 1);
-  }
 `
 
 const Question = styled.div`
@@ -299,18 +284,15 @@ const Question = styled.div`
 `
 
 const Answer = styled.div<{ $isActive: boolean }>`
-  max-height: ${(props) => (props.$isActive ? "1000px" : "0")};
+  height: ${(props) => (props.$isActive ? "auto" : "0")};
+  display: ${(props) => (props.$isActive ? "block" : "none")};
   opacity: ${(props) => (props.$isActive ? "1" : "0")};
-  pointer-events: ${(props) => (props.$isActive ? "auto" : "none")};
-  margin-top: ${(props) => (props.$isActive ? "20px" : "0")};
   overflow: hidden;
   transition:
-    max-height 0.2s ease-in-out,
-    opacity 0.3s ease-in-out,
-    margin-top 0.3s ease-in-out;
-  will-change: max-height, opacity;
-
+    height 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
   text-align: justify;
+  margin-top: 20px;
   font-size: 16px;
   color: rgba(235, 236, 250, 0.8);
 

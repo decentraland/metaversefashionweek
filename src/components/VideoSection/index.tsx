@@ -13,6 +13,9 @@ const VideoSection = () => {
   )
   const [isMobile, setIsMobile] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
+  // const [videoSource, setVideoSource] = useState(
+  //   isMobile ? videoMobile : videoDesktopNoText
+  // )
   const { ref: inViewRef, inView } = useInView({
     threshold: 0,
   })
@@ -29,6 +32,7 @@ const VideoSection = () => {
     const handleResize = () => {
       const mobileWidth = window.innerWidth <= 568
       setIsMobile(mobileWidth)
+      // setVideoSource(mobileWidth ? videoMobile : videoDesktopNoText)
     }
 
     window.addEventListener("resize", handleResize)
@@ -48,9 +52,11 @@ const VideoSection = () => {
     if (!videoElement) return
 
     if (inView) {
+      videoElement.muted = false
       videoElement.play().catch((error) => {
         console.error("Error al reproducir el video:", error)
         if (error.name === "NotAllowedError") {
+          videoElement.muted = true
           videoElement.play().catch((e) => {
             console.error("Error al reproducir el video silenciado:", e)
           })
