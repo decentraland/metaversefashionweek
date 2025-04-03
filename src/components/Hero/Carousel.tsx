@@ -57,6 +57,7 @@ const CarouselContainer = styled.div`
   overflow: hidden;
   position: relative;
   border-top: 2px solid #ebecfa;
+  border-bottom: 2px solid #ebecfa;
 `
 
 const CarouselTrack = styled.div`
@@ -71,7 +72,7 @@ const CarouselTrack = styled.div`
 
 const CarouselItem = styled.div`
   flex: 0 0 auto;
-  height: 200px;
+  height: 300px;
   overflow: hidden;
 
   img {

@@ -6,6 +6,7 @@ import { styled } from "styled-components"
 import { ExperiencesSection } from "./components/ExperiencesSection"
 import { Faq } from "./components/Faq/Faq"
 import { Footer } from "./components/Footer/Footer"
+import { Carousel } from "./components/Hero/Carousel"
 import { Hero } from "./components/Hero/Hero"
 import { LiveTalks } from "./components/LiveTalks/LiveTalks"
 // import { Map } from "./components/Map/Map"
@@ -48,9 +49,10 @@ const App = () => {
       <Navbar />
       <AppContainer>
         <Hero />
-        <MarqueeWrapper>
+        <Carousel />
+        {/* <MarqueeWrapper>
           <Marquee />
-        </MarqueeWrapper>
+        </MarqueeWrapper> */}
         <ScheduleSection />
         <MarqueeWrapper>
           <Marquee />
