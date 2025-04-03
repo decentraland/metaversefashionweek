@@ -269,6 +269,13 @@ const TalkCard = styled.div`
     object-fit: cover;
     aspect-ratio: 16/9;
     border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    &:hover {
+      transform: scale(1.03);
+      transition: transform 0.3s ease;
+    }
   }
 
   h3 {
@@ -286,14 +293,17 @@ const TalkCard = styled.div`
   }
 
   @media (max-width: ${breakpoints.md}) {
-    padding: 15px;
+    padding: 0;
 
     h3 {
       font-size: 20px;
+      letter-spacing: 0.05em;
     }
 
     p {
       font-size: 14px;
+      letter-spacing: 0.05em;
+      opacity: 0.8;
     }
 
     img {
@@ -304,6 +314,7 @@ const TalkCard = styled.div`
 
 const TalkTime = styled.p`
   font-weight: 400 !important;
+  letter-spacing: 0.05em;
 `
 
 const TimeInfo = styled.div`

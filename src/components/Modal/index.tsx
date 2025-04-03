@@ -53,7 +53,7 @@ const ModalBackdrop = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
   width: 90%;
   background-color: #0f1417;
   border-radius: 4px;

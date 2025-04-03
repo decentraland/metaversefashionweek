@@ -238,6 +238,21 @@ const Container = styled.div`
       height: 100%;
       min-height: fit-content;
 
+      h2 {
+        font-size: 24px;
+        font-weight: 400;
+        color: #ebecfa;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: #ebecfa;
+        letter-spacing: 0.07em;
+      }
+
       &.experiences {
         min-height: max-content;
         will-change: transform;

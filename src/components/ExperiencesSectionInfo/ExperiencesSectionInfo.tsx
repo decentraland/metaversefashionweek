@@ -138,7 +138,7 @@ const ExperiencesSectionInfoContainer = styled.div`
     .showrooms__container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 64px;
       margin-top: 32px;
 
       .showroom__item {
@@ -147,11 +147,15 @@ const ExperiencesSectionInfoContainer = styled.div`
         gap: 12px;
 
         img {
-          mix-blend-mode: multiply;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          max-width: 700px;
         }
 
         h4 {
           font-size: 18px;
+          opacity: 0.8;
           font-weight: bold;
           color: #ebecfa;
           letter-spacing: 0.05em;
