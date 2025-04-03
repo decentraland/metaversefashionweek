@@ -151,6 +151,7 @@ const ExperiencesSectionInfoContainer = styled.div`
           height: 100%;
           object-fit: contain;
           max-width: 700px;
+          pointer-events: none;
         }
 
         h4 {
