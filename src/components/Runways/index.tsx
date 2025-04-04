@@ -190,6 +190,7 @@ const Container = styled.div`
       align-items: center;
       gap: 24px;
       width: 100%;
+      text-align: right;
 
       .actions {
         display: flex;
