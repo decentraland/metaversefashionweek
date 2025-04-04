@@ -106,7 +106,7 @@ const LiveTalksContainer = styled.div`
   padding: 24px;
   position: relative;
   max-width: 1200px;
-
+  margin-block: 100px;
   @media (min-width: ${breakpoints.l}) {
     flex-direction: row;
     justify-content: center;

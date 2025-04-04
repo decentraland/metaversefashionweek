@@ -89,10 +89,11 @@ const ExperiencesSectionInfoContainer = styled.div`
     display: none;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: flex-end;
     gap: 12px;
     width: 100%;
     max-width: 200px;
-    padding-right: 24px;
+    text-align: right;
 
     img {
       width: 100%;

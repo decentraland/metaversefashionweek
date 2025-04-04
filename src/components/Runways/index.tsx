@@ -76,7 +76,7 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
   }
 
   return (
-    <Container>
+    <Container id="runways">
       <div className="header">
         <div className="header__left">
           <h2>
@@ -173,6 +173,7 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 66px;
+  margin-block: 100px;
 
   .header {
     display: flex;
@@ -370,7 +371,7 @@ const ExperiencesContainer = styled.div`
 
     @media (min-width: ${breakpoints.md}) {
       min-width: 220px;
-      max-width: 280px;
+      max-width: 220px;
     }
 
     img {

@@ -14,10 +14,13 @@ const Navbar = () => {
               <a href="#schedule">Schedule</a>
             </span>
             <span>
-              <a href="#faq">FAQ</a>
+              <a href="#talks">Talks</a>
             </span>
             <span>
-              <a href="#talks">Talks</a>
+              <a href="#runways">Runways</a>
+            </span>
+            <span>
+              <a href="#faq">FAQ</a>
             </span>
           </div>
         </div>
