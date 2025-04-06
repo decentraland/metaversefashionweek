@@ -137,7 +137,7 @@ const Runways = ({ useMode = "runways" }: RunwaysProps) => {
             >
               <img src={runway.image} alt={runway.title} />
               <h2>{runway.title}</h2>
-              <p>{runway.location}</p>
+              {/* <p>{runway.location}</p> */}
             </div>
           ))}
         </RunwaysContainer>
