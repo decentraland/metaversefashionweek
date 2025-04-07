@@ -3,8 +3,10 @@ import { useEffect, useRef } from "react"
 import Lenis from "lenis"
 import { styled } from "styled-components"
 // Components
+import { ExperiencesSection } from "./components/ExperiencesSection"
 import { Faq } from "./components/Faq/Faq"
 import { Footer } from "./components/Footer/Footer"
+import { Carousel } from "./components/Hero/Carousel"
 import { Hero } from "./components/Hero/Hero"
 import { LiveTalks } from "./components/LiveTalks/LiveTalks"
 // import { Map } from "./components/Map/Map"
@@ -47,9 +49,10 @@ const App = () => {
       <Navbar />
       <AppContainer>
         <Hero />
-        <MarqueeWrapper>
+        <Carousel />
+        {/* <MarqueeWrapper>
           <Marquee />
-        </MarqueeWrapper>
+        </MarqueeWrapper> */}
         <ScheduleSection />
         <MarqueeWrapper>
           <Marquee />
@@ -62,7 +65,11 @@ const App = () => {
         <MarqueeWrapper>
           <Marquee />
         </MarqueeWrapper>
-        {/* <Map /> */}
+        <ExperiencesSection />
+        <MarqueeWrapper>
+          <Marquee />
+        </MarqueeWrapper>
+
         <Faq />
         <Footer />
       </AppContainer>
