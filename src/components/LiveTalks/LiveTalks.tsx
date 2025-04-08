@@ -4,7 +4,7 @@ import { liveTalksData } from "./data"
 import iconsTalks from "../../img/vectors/logos-talks.svg?url"
 import iconTalksSingle from "../../img/vectors/talksico.svg?url"
 import { breakpoints } from "../../utils/theme"
-import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
 import { Modal } from "../Modal"
 
 const LiveTalks = () => {
@@ -60,7 +60,7 @@ const LiveTalks = () => {
             <div className="header-desktop-icons">
               <img src={iconsTalks} alt="LinkedIn" />
             </div>
-            <DownloadBtn showAvailableOnText={false} />
+            <JumpInBtn />
           </div>
         </div>
         <TalksGrid>
@@ -86,12 +86,9 @@ const LiveTalks = () => {
           ))}
         </TalksGrid>
       </LiveTalksContainer>
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        imageUrl={modalImageUrl}
-        alt="Modal Image"
-      />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <ModalImage src={modalImageUrl} alt="Modal Image" />
+      </Modal>
     </>
   )
 }
@@ -236,6 +233,13 @@ const LiveTalksContainer = styled.div`
       }
     }
   }
+`
+
+const ModalImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0 auto;
 `
 
 const TalksGrid = styled.div`

@@ -6,11 +6,16 @@ import { styled } from "styled-components"
 type ModalProps = {
   isOpen: boolean
   onClose: () => void
-  imageUrl: string
-  alt?: string
+  children: React.ReactNode
+  isDownloadModal?: boolean
 }
 
-const Modal = ({ isOpen, onClose, imageUrl, alt = "Imagen" }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  isDownloadModal = false,
+}: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
@@ -27,11 +32,14 @@ const Modal = ({ isOpen, onClose, imageUrl, alt = "Imagen" }: ModalProps) => {
 
   return (
     <ModalBackdrop onClick={onClose}>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
+      <ModalContent
+        onClick={(e) => e.stopPropagation()}
+        isDownloadModal={isDownloadModal}
+      >
         <CloseButton onClick={onClose}>
           <IoMdClose />
         </CloseButton>
-        <ModalImage src={imageUrl} alt={alt} />
+        {children}
       </ModalContent>
     </ModalBackdrop>
   )
@@ -51,7 +59,7 @@ const ModalBackdrop = styled.div`
   z-index: 1000;
 `
 
-const ModalContent = styled.div`
+const ModalContent = styled.div<{ isDownloadModal?: boolean }>`
   position: relative;
   max-width: 1200px;
   width: 90%;
@@ -59,12 +67,16 @@ const ModalContent = styled.div`
   border-radius: 4px;
   padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-`
+  border: 0.5px solid #ebecfa;
 
-const ModalImage = styled.img`
-  width: 100%;
-  height: auto;
-  display: block;
+  ${({ isDownloadModal }) =>
+    isDownloadModal &&
+    `
+    max-width: 500px;
+    margin: 0 auto;
+  `}
+  padding-block: ${({ isDownloadModal }) =>
+    isDownloadModal ? "48px" : "24px"};
 `
 
 const CloseButton = styled.button`

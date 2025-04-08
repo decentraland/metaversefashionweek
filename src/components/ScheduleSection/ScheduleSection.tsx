@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
 import scheduleBg from "../../img/misc/schedule.png"
-import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+import { JumpInBtn } from "../JumpInBtn/JumpInBtn"
 import { ScheduleTabs } from "../ScheduleTabs/ScheduleTabs"
 const ScheduleSection = () => {
   return (
@@ -28,7 +28,7 @@ const ScheduleSection = () => {
         <div className="schedule-tabs-section-left">
           <h3>Schedule</h3>
           <span className="download-btn-container">
-            <DownloadBtn showAvailableOnText={false} />
+            <JumpInBtn />
           </span>
         </div>
         <div className="schedule-tabs-container">
@@ -36,7 +36,7 @@ const ScheduleSection = () => {
         </div>
       </div>
       <div className="download-btn-container">
-        <DownloadBtn showAvailableOnText={false} />
+        <JumpInBtn />
       </div>
     </ScheduleSectionContainer>
   )
@@ -160,10 +160,6 @@ const ScheduleSectionContainer = styled.section`
 
     .download-btn-container {
       margin-top: auto !important;
-      a:first-child {
-        margin-bottom: 0 !important;
-        margin-top: calc(100%) !important;
-      }
     }
 
     @media (max-width: 1024px) {
