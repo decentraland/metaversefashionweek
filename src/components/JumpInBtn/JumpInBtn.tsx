@@ -12,8 +12,11 @@ interface DownloadBtnProps {
 const JumpInBtn = ({ className }: DownloadBtnProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleClick = async () => {
-    const resp = await launchDesktopApp("decentraland://jump/?position=148,-78")
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const resp = await launchDesktopApp(
+      e.currentTarget,
+      "decentraland://jump/?position=148,-78"
+    )
     if (resp) return
     setIsModalOpen(true)
   }
@@ -21,7 +24,10 @@ const JumpInBtn = ({ className }: DownloadBtnProps) => {
   return (
     <>
       <DownloadButtonsContainer>
-        <DownloadButton className={className} onClick={handleClick}>
+        <DownloadButton
+          className={className}
+          onClick={(e) => handleClick(e as React.MouseEvent<HTMLButtonElement>)}
+        >
           JUMP IN
         </DownloadButton>
       </DownloadButtonsContainer>
