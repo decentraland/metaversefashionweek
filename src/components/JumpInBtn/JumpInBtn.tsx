@@ -45,7 +45,9 @@ const JumpInBtn = ({ className }: DownloadBtnProps) => {
       <DownloadButtonsContainer>
         <DownloadButton
           className={className}
-          onClick={(e) => handleClick(e as React.MouseEvent<HTMLButtonElement>)}
+          onMouseDown={(e) =>
+            handleClick(e as React.MouseEvent<HTMLButtonElement>)
+          }
         >
           JUMP IN
         </DownloadButton>
