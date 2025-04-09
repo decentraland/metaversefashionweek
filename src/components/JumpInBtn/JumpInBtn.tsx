@@ -15,7 +15,7 @@ const JumpInBtn = ({ className }: DownloadBtnProps) => {
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const resp = await launchDesktopApp(
       e.currentTarget,
-      "decentraland://jump/?position=144%2C-78"
+      "decentraland://?position=144%2C-78"
     )
     if (resp) return
     setIsModalOpen(true)
