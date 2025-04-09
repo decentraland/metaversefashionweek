@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { styled } from "styled-components"
 import { launchDesktopApp } from "../../utils/utils"
 import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
@@ -11,22 +11,43 @@ interface DownloadBtnProps {
 
 const JumpInBtn = ({ className }: DownloadBtnProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (isMobile) {
+      window.location.href = "https://decentraland.org/download"
+      return
+    }
     const resp = await launchDesktopApp(
       e.currentTarget,
-      "decentraland://jump/?position=144%2C-78"
+      "decentraland://?position=144%2C-78"
     )
     if (resp) return
     setIsModalOpen(true)
   }
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobileWidth = window.innerWidth <= 568
+      setIsMobile(mobileWidth)
+    }
+
+    window.addEventListener("resize", handleResize)
+    handleResize()
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   return (
     <>
       <DownloadButtonsContainer>
         <DownloadButton
           className={className}
-          onClick={(e) => handleClick(e as React.MouseEvent<HTMLButtonElement>)}
+          onMouseDown={(e) =>
+            handleClick(e as React.MouseEvent<HTMLButtonElement>)
+          }
         >
           JUMP IN
         </DownloadButton>
