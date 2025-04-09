@@ -17,8 +17,8 @@ const JumpInBtn = ({ className }: DownloadBtnProps) => {
       e.currentTarget,
       "decentraland://jump/?position=144%2C-78"
     )
-    console.log("resp", resp)
-    if (!resp) setIsModalOpen(true)
+    if (resp) return
+    setIsModalOpen(true)
   }
 
   return (
