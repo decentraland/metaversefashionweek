@@ -181,7 +181,9 @@ const renderContent = (activeTab: number) => {
               <span>
                 <b>10:00pm UTC 03:00pm PST</b>
               </span>
-              <span>Opening Party</span>
+              <span>
+                Opening Party with <b>Marc Romboy</b>
+              </span>
             </ListItem>{" "}
           </List>
         </>
@@ -400,7 +402,9 @@ const renderContent = (activeTab: number) => {
               <span>
                 <b>Midnight UTC 01:00pm PST</b>
               </span>
-              <span>Closing Party</span>
+              <span>
+                Closing Party with <b>Coppola</b>
+              </span>
             </ListItem>{" "}
           </List>
         </>

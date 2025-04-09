@@ -20,8 +20,8 @@ const DownloadBtn = ({
   className,
   showAvailableOnText = true,
 }: DownloadBtnProps) => {
-  const [isMobile, setIsMobile] = useState(false)
   const [downloadLink, setDownloadLink] = useState("")
+  const [isMobile, setIsMobile] = useState(false)
   const [isMac, setIsMac] = useState(false)
   const [isWindows, setIsWindows] = useState(false)
   const [isKnownMacArch, setIsKnownMacArch] = useState(true)
@@ -104,7 +104,6 @@ const DownloadBtn = ({
 
   const renderDownloadButton = () => {
     const mobileDevice = isMobileDevice()
-
     if (mobileDevice) {
       return (
         <DownloadButton

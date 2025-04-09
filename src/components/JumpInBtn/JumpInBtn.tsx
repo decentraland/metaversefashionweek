@@ -1,48 +1,162 @@
+import { useState } from "react"
 import { styled } from "styled-components"
+import { launchDesktopApp } from "../../utils/utils"
+import { DownloadBtn } from "../DownloadBtn/DownloadBtn"
+import { Modal } from "../Modal"
 
-interface JumpInBtnProps {
+interface DownloadBtnProps {
   className?: string
-  href?: string
-  onClick?: () => void
-  children?: React.ReactNode
+  showAvailableOnText?: boolean
 }
 
-const JumpInBtn = ({
-  className,
-  href,
-  onClick,
-  children = "JUMP IN",
-}: JumpInBtnProps) => {
+const JumpInBtn = ({ className }: DownloadBtnProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const resp = await launchDesktopApp(
+      e.currentTarget,
+      "decentraland://jump/?position=148,-78"
+    )
+    if (resp) return
+    setIsModalOpen(true)
+  }
+
   return (
-    <StyledJumpInBtn className={className} href={href} onClick={onClick}>
-      {children}
-    </StyledJumpInBtn>
+    <>
+      <DownloadButtonsContainer>
+        <DownloadButton
+          className={className}
+          onClick={(e) => handleClick(e as React.MouseEvent<HTMLButtonElement>)}
+        >
+          JUMP IN
+        </DownloadButton>
+      </DownloadButtonsContainer>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        isDownloadModal
+      >
+        <ModalContent>
+          <div>
+            <h1>Launcher not installed</h1>
+            <p>Please install the launcher to jump in</p>
+          </div>
+          <DownloadBtn showAvailableOnText={false} />
+        </ModalContent>
+      </Modal>
+    </>
   )
 }
 
-const StyledJumpInBtn = styled.a`
-  background-color: #ebecfa;
-  color: #0f1417;
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-decoration: none;
-  min-width: 354px;
-  text-align: center;
-  font-size: 40px;
-  font-weight: 700;
-  display: block;
-  transition: all 0.3s ease;
+const DownloadButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 12px;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  @media screen and (max-width: 568px) {
-    font-size: 24px;
-    min-width: 200px;
-    padding: 8px 16px;
+  .available-on-text {
+    padding-top: 16px;
   }
 `
 
-export { JumpInBtn }
+const DownloadButton = styled.span`
+  font-size: 16px;
+  font-weight: 400;
+  color: #ebecfa;
+  background-color: #0f1417;
+  text-decoration: none;
+  border: 2px solid #ebecfa;
+  border-radius: 12px;
+  padding: 12px 24px;
+  will-change: background-color, color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+
+  @media screen and (max-width: 568px) {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  &:hover {
+    color: #0f1417;
+    background-color: #ebecfa;
+
+    svg {
+      path {
+        fill: #0f1417;
+      }
+    }
+  }
+
+  svg {
+    height: 32px;
+    width: 32px;
+  }
+`
+
+const StyledJumpInBtn = styled(JumpInBtn)`
+  cursor: pointer;
+  margin-top: 12px;
+
+  .download-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .mac-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .available-on-text {
+    font-size: 16px;
+    margin-top: 16px;
+    color: #ebecfa;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid #ebecfa;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+`
+
+const ModalContent = styled.div`
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+`
+
+export { StyledJumpInBtn as JumpInBtn }
