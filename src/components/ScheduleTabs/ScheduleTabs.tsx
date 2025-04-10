@@ -214,7 +214,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>11:00am UTC 04:00am PST </b>
+                <b>11:00am UTC 04:00am PST</b>
               </span>
               <span>
                 Decentraland Japan <b>RUNWAY</b>{" "}
