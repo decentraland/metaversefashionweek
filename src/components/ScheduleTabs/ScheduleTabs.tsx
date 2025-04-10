@@ -214,7 +214,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>03:00am UTC 08:00pm PST</b>
+                <b>11:00am UTC 04:00am PST</b>
               </span>
               <span>
                 Decentraland Japan <b>RUNWAY</b>{" "}
@@ -222,7 +222,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>06:00pm UTC 10:00am PST</b>
+                <b>5:00pm UTC 10:00 am PST</b>
               </span>
               <span>
                 Gaming x Fashion <b>LIVE TALK</b>
@@ -230,7 +230,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>07:00pm UTC 11:00am PSTT</b>
+                <b>6:00pm UTC 11:00 am PST</b>
               </span>
               <span>
                 Cyberdog <b>RUNWAY</b>
@@ -293,7 +293,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>03:00am UTC 08:00pm PST</b>
+                <b>3:00pm UTC 8:00 am PST</b>
               </span>
               <span>
                 Avatares y Cultura <b>LIVE TALK</b>
@@ -370,7 +370,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>05:00am UTC 10:00pm PST</b>
+                <b>5:00pm UTC 10:00am PST</b>
               </span>
               <span>
                 Cyberdog <b>RUNWAY</b>
@@ -378,7 +378,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>06:00am UTC 11:00pm PST</b>
+                <b>06:00pm UTC 11:00pm PST</b>
               </span>
               <span>
                 Free The Youth <b>RUNWAY</b>{" "}
@@ -386,7 +386,7 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>07:00am UTC 12:00pm PST</b>
+                <b>07:00pm UTC 12:00pm PST</b>
               </span>
               <span>
                 The Banners We Wear <b>RUNWAY</b>{" "}
@@ -394,13 +394,13 @@ const renderContent = (activeTab: number) => {
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>08:00am UTC 05:00pm PST</b>
+                <b>08:00pm UTC 05:00pm PST</b>
               </span>
               <span>Fashion Film Screenings</span>
             </ListItem>{" "}
             <ListItem>
               <span>
-                <b>Midnight UTC 01:00pm PST</b>
+                <b>Midnight 5:00pm PST</b>
               </span>
               <span>
                 Closing Party with <b>Coppola</b>
