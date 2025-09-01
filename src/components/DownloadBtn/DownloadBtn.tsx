@@ -4,9 +4,9 @@ import { styled } from "styled-components"
 import { useAdvancedUserAgentData } from "../../hooks/useAdvancedUserAgentData"
 
 enum DownloadLinks {
-  MAC_ARM64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-arm64.dmg",
-  MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-mac-x64.dmg",
-  WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Launcher-win-x64.exe",
+  MAC_ARM64 = "https://explorer-artifacts.decentraland.org/launcher-rust/Decentraland_installer.dmg",
+  MAC_X64 = "https://explorer-artifacts.decentraland.org/launcher/dcl/Decentraland%20Outdated-mac-x64.dmg",
+  WIN_X64 = "https://explorer-artifacts.decentraland.org/launcher-rust/Decentraland_installer.exe",
   UNKNOWN = "",
   MOBILE_REDIRECT = "https://decentraland.org/download/",
 }
