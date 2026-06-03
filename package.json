@@ -34,7 +34,7 @@
     "npm": "8.* || 9.*"
   },
   "dependencies": {
-    "@dcl/ui-env": "^1.5.1",
+    "@dcl/ui-env": "^2.0.0",
     "decentraland-ui2": "^0.12.1",
     "isbot": "^5.1.23",
     "lenis": "^1.2.3",
